@@ -1,4 +1,6 @@
-![VEGA SoC Banner](https://user-images.githubusercontent.com/assets/banner-vega-soc.png)
+<p align="center">
+  <img src="banner.jpeg" width="100%">
+</p>
 
 # VEGA SoC - Multi-Power-Domain RTL-to-GDSII ASIC Implementation
 
@@ -32,6 +34,10 @@ The processor and memory domains can be powered down to reduce leakage power whi
 ---
 
 ## Complete Design Flow
+
+<p align="center">
+  <img src="banner.jpeg" width="100%">
+</p>
 
 ### Stage 1: Problem Definition
 - Design a low-power SoC with multi-power-domain architecture
@@ -233,22 +239,7 @@ This project uses GitHub Actions for automated testing and verification:
 
 For more details, see [.github/workflows/](.github/workflows/) directory.
 
----
 
-## Quick Start
-
-### Run Synthesis
-```bash
-cd qflow_proj/
-qflow synthesize vega_top
-```
-
-### Run Place & Route
-```bash
-qflow place vega_top && qflow route vega_top
-```
-
----
 
 ## Results
 
@@ -266,19 +257,3 @@ qflow place vega_top && qflow route vega_top
 - Formal Verification
 - OpenROAD Integration
 - Silicon Tapeout
-
----
-
-## Author
-
-**Shiv Kumar** | B.Tech VLSI | Jaypee Institute of Information Technology
-
----
-
-## License
-
-MIT License - See [LICENSE](LICENSE) file
-
----
-
-**Status:** Complete | **Last Updated:** June 2026
