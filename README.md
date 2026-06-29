@@ -2,7 +2,7 @@
 
 # VEGA SoC - Multi-Power-Domain RTL-to-GDSII ASIC Implementation
 
-A low-power multi-power-domain System-on-Chip (SoC) designed using SystemVerilog and implemented through a complete RTL-to-GDSII ASIC design flow using open-source EDA tools with IEEE 1801 UPF impl[...]
+A low-power multi-power-domain System-on-Chip (SoC) designed using SystemVerilog and implemented through a complete RTL-to-GDSII ASIC design flow using open-source EDA tools with IEEE 1801 UPF implementation.
 
 ---
 
@@ -200,6 +200,38 @@ VEGA-SoC/
 ├── scripts/          # Automation scripts
 └── README.md
 ```
+
+---
+
+## CI/CD Workflow
+
+This project uses GitHub Actions for automated testing and verification:
+
+### RTL Simulation Workflow
+- **Trigger:** Push to main branch or pull requests
+- **Steps:**
+  1. Compile RTL with Icarus Verilog
+  2. Run testbench and generate VCD waveforms
+  3. Analyze functional verification results
+  4. Generate coverage reports
+
+### Synthesis Workflow
+- **Trigger:** On tagged releases
+- **Steps:**
+  1. Run Yosys synthesis
+  2. Generate gate-level netlist
+  3. Analyze timing and area reports
+  4. Archive synthesis artifacts
+
+### Physical Design Verification Workflow
+- **Trigger:** Manual dispatch
+- **Steps:**
+  1. Run DRC checks with Magic VLSI
+  2. Run LVS verification with Netgen
+  3. Generate verification reports
+  4. Check design rule compliance
+
+For more details, see [.github/workflows/](.github/workflows/) directory.
 
 ---
 
