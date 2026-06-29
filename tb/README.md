@@ -1,9 +1,3 @@
-# Testbench Directory
+# Testbenches
 
-Testbenches and simulation files for VEGA SoC
-
-## Contents
-- SystemVerilog testbenches (.sv)
-- Test vectors
-- VCD waveform files
-- Simulation reports
+Verification testbenches for VEGA SoC

@@ -1,10 +1,3 @@
-# Qflow Physical Design Directory
+# Physical Design
 
-Physical design and place & route files for VEGA SoC
-
-## Contents
-- DEF/LEF files
-- GDSII layout
-- Netlists
-- Verification reports (DRC, LVS)
-- Timing analysis reports
+Place & Route and layout files
