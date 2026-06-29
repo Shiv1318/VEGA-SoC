@@ -1,0 +1,70 @@
+
+--------------------------------
+Qflow project setup
+--------------------------------
+
+Technology set to osu035
+Regenerating files for existing project vega_top
+Qrouter detail maze router version 1.4.59.T
+Reading LEF data from file /apps/vlsi/share/qflow/tech/osu035/osu035_stdcells.lef.
+LEF Read, Line 135: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 136: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 140: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 141: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 151: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 152: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 156: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 157: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 167: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 168: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 172: NOTE:  Old format VIARULE ignored.
+LEF Read, Line 173: NOTE:  Old format VIARULE ignored.
+LEF file:  Defines site corner (ignored)
+LEF file:  Defines site IO (ignored)
+LEF file:  Defines site core (ignored)
+LEF read: Processed 3179 lines.
+LEF Read: encountered 0 errors and 12 warnings total.
+Vertical route layer at non-minimum pitch 3.2.  Using smaller pitch 1.6, will route on 1-of-2 tracks for layer metal4.
+Running blif2cel to generate input files for graywolf
+blif2cel.tcl --blif ./vega_top.blif  --lef  /apps/vlsi/share/qflow/tech/osu035/osu035_stdcells.lef --cel ./vega_top.cel 
+No vega_top.cel1 file found for project. . . no partial blockages to apply to layout.
+Running decongest to set initial density of 0.45
+decongest.tcl vega_top  /apps/vlsi/share/qflow/tech/osu035/osu035_stdcells.lef FILL 0.45 --units=100
+Reading FILL {} {} macros from LEF file.
+
+decongest.tcl:
+Fixed density planning, density = 0.45
+Number of cells = 6908, total width = 6360800
+Width of fill = 7774311
+Width of decap = 0
+Width of antenna  = 0
+
+Done!
+No vega_top.cel2 file found for project. . . continuing without pin placement hints
+Running GrayWolf placement
+graywolf  vega_top
+Running getfillcell to determine cell to use for fill.
+getfillcell.tcl vega_top  /apps/vlsi/share/qflow/tech/osu035/osu035_stdcells.lef FILL
+Using cell FILL for fill
+Running place2def to translate graywolf output to DEF format.
+place2def.tcl vega_top FILL 
+Running addspacers to generate power stripes and align cell right edge
+addspacers.tcl  -stripe 5 150 PG vega_top  /apps/vlsi/share/qflow/tech/osu035/osu035_stdcells.lef FILL
+Running arrangepins to adjust pin positions for optimal routing.
+arrangepins.tcl  vega_top
+Reading info file vega_top.info. . .
+Reading DEF file vega_top.def. . .
+Recalculating pin positions
+Writing DEF file vega_top_mod.def. . .
+Done with arrangepins.tcl
+blifanno.tcl ./vega_top.blif vega_top.def ./vega_top_anno.blif
+Generating RTL verilog and SPICE netlist file in directory
+   .
+Files:
+   Verilog: ./vega_top.rtl.v
+   Verilog: ./vega_top.rtlnopwr.v
+   Verilog: ./vega_top.rtlbb.v
+   Spice:   ./vega_top.spc
+Copying vega_top.rtl.v, vega_top.rtlnopwr.v, and vega_top.rtlbb.v to backups
+Running blif2Verilog.
+Running blif2BSpice.

@@ -1,0 +1,10 @@
+obstruction -6.4 1462.0 2006.4 1466.0 metal1
+obstruction -6.4 -6.0 2006.4 0.2 metal1
+obstruction -6.4 -6.0 0.0 1466.0 metal1
+obstruction 2001.6 -6.0 2006.4 1466.0 metal1
+obstruction 0.0 1462.0 2001.6 1466.0 metal3
+obstruction 0.0 -6.0 2001.6 0.2 metal3
+obstruction -6.4 0.2 0.0 1462.0 metal2
+obstruction 2001.6 0.2 2006.4 1462.0 metal2
+obstruction -6.4 0.2 0.0 1462.0 metal4
+obstruction 2001.6 0.2 2006.4 1462.0 metal4

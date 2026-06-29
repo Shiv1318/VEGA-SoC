@@ -1,0 +1,247 @@
+
+--------------------------------
+Qflow project setup
+--------------------------------
+
+Technology set to osu035
+Regenerating files for existing project vega_top
+Running qrouter 1.4.59.T
+qrouter -nog  -s vega_top.cfg
+*** Running stage1 routing with defaults
+Nets remaining: 7100
+Nets remaining: 7000
+Nets remaining: 6900
+Nets remaining: 6800
+Nets remaining: 6700
+Nets remaining: 6600
+Nets remaining: 6500
+Nets remaining: 6400
+Nets remaining: 6300
+Nets remaining: 6200
+Nets remaining: 6100
+Nets remaining: 6000
+Nets remaining: 5900
+Nets remaining: 5800
+Nets remaining: 5700
+Nets remaining: 5600
+Nets remaining: 5500
+Nets remaining: 5400
+Nets remaining: 5300
+Nets remaining: 5200
+Nets remaining: 5100
+Nets remaining: 5000
+Nets remaining: 4900
+Nets remaining: 4800
+Nets remaining: 4700
+Nets remaining: 4600
+Nets remaining: 4500
+Nets remaining: 4400
+Nets remaining: 4300
+Nets remaining: 4200
+Nets remaining: 4100
+Nets remaining: 4000
+Nets remaining: 3900
+Nets remaining: 3800
+Nets remaining: 3700
+Nets remaining: 3600
+Nets remaining: 3500
+Nets remaining: 3400
+Nets remaining: 3300
+Nets remaining: 3200
+Nets remaining: 3100
+Nets remaining: 3000
+Nets remaining: 2900
+Nets remaining: 2800
+Nets remaining: 2700
+Nets remaining: 2600
+Nets remaining: 2500
+Nets remaining: 2400
+Nets remaining: 2300
+Nets remaining: 2200
+Nets remaining: 2100
+Nets remaining: 2000
+Nets remaining: 1900
+Nets remaining: 1800
+Nets remaining: 1700
+Nets remaining: 1600
+Nets remaining: 1500
+Nets remaining: 1400
+Nets remaining: 1300
+Nets remaining: 1200
+Nets remaining: 1100
+Nets remaining: 1000
+Nets remaining: 900
+Nets remaining: 800
+Nets remaining: 700
+Nets remaining: 600
+Nets remaining: 500
+Progress: Stage 1 total routes completed: 16563
+Failed net routes: 505
+*** Running stage2 routing with options mask 10, effort 10
+Progress: Stage 2 total routes completed: 16585
+Failed net routes: 512
+*** Running stage2 routing with options mask none, effort 20
+Nets remaining: 500
+Nets remaining: 400
+Nets remaining: 300
+Nets remaining: 300
+Nets remaining: 200
+Nets remaining: 100
+Nets remaining: 100
+Nets remaining: 90
+Nets remaining: 90
+Nets remaining: 80
+Nets remaining: 70
+Nets remaining: 60
+Nets remaining: 60
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Progress: Stage 2 total routes completed: 21060
+Failed net routes: 42
+*** Running stage2 routing with options mask 20, effort 10
+Nets remaining: 50
+Nets remaining: 50
+Progress: Stage 2 total routes completed: 21190
+Failed net routes: 51
+*** Running stage2 routing with options mask none, effort 20
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 40
+Nets remaining: 30
+Nets remaining: 30
+Nets remaining: 30
+Nets remaining: 30
+Progress: Stage 2 total routes completed: 21767
+Failed net routes: 30
+*** Running stage2 routing with options mask 30, effort 10
+Nets remaining: 30
+Nets remaining: 40
+Progress: Stage 2 total routes completed: 21860
+Failed net routes: 38
+*** Running stage2 routing with options mask none, effort 20
+Nets remaining: 40
+Nets remaining: 30
+Nets remaining: 30
+Nets remaining: 30
+Nets remaining: 30
+Nets remaining: 30
+Progress: Stage 2 total routes completed: 22220
+Failed net routes: 29
+*** Running stage2 routing with options mask 40, effort 10
+Nets remaining: 30
+Nets remaining: 30
+Progress: Stage 2 total routes completed: 22401
+Failed net routes: 36
+*** Running stage2 routing with options mask none, effort 20
+Nets remaining: 30
+Nets remaining: 30
+Progress: Stage 2 total routes completed: 22721
+Failed net routes: 33
+*** Running stage2 routing with options mask 50, effort 10
+Nets remaining: 30
+Nets remaining: 30
+Nets remaining: 30
+Nets remaining: 30
+Nets remaining: 30
+Progress: Stage 2 total routes completed: 22937
+Failed net routes: 31
+*** Running stage2 routing with options mask 60, effort 10
+Nets remaining: 30
+Nets remaining: 40
+Progress: Stage 2 total routes completed: 23055
+Failed net routes: 42
+*** Running stage2 routing with options mask none, effort 20
+Nets remaining: 40
+Nets remaining: 40
+Progress: Stage 2 total routes completed: 23246
+Failed net routes: 42
+*** Running stage2 routing with options mask 70, effort 10
+Nets remaining: 40
+Progress: Stage 2 total routes completed: 23476
+Failed net routes: 36
+*** Running stage2 routing with options mask 80, effort 10
+Nets remaining: 40
+Nets remaining: 50
+Progress: Stage 2 total routes completed: 23600
+Failed net routes: 50
+*** Running stage2 routing with options mask none, effort 20
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Progress: Stage 2 total routes completed: 24560
+Failed net routes: 44
+*** Running stage2 routing with options mask 90, effort 10
+Nets remaining: 50
+Progress: Stage 2 total routes completed: 24659
+Failed net routes: 51
+*** Running stage2 routing with options mask none, effort 20
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 60
+Progress: Stage 2 total routes completed: 24843
+Failed net routes: 54
+*** Running stage2 routing with options mask 100, effort 10
+Nets remaining: 50
+Progress: Stage 2 total routes completed: 25061
+Failed net routes: 49
+*** Running stage2 routing with options mask none, effort 30
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 50
+Nets remaining: 60
+Progress: Stage 2 total routes completed: 25517
+Failed net routes: 62
+*** Running stage2 routing with options mask none, effort 40
+Nets remaining: 60
+Nets remaining: 60
+Nets remaining: 60
+Nets remaining: 60
+Nets remaining: 60
+Nets remaining: 60
+Nets remaining: 60
+Nets remaining: 60
+Progress: Stage 2 total routes completed: 25895
+Failed net routes: 59
+*** Writing DEF file vega_top_route.def
+Final: Failed net routes: 59
+List of failed nets follows:
+*** Writing RC file vega_top_route.rc
+Running annotate.tcl antenna.out ./vega_top.rtlnopwr.v
+  ./vega_top.spc ./vega_top.rtlnopwr.anno.v
+  ./vega_top.anno.spc  /apps/vlsi/share/qflow/tech/osu035/osu035_stdcells.sp ./vega_top_powerground
+Running annotate.tcl
+found cell FILL pinlist vdd gnd
+Done with annotate.tcl

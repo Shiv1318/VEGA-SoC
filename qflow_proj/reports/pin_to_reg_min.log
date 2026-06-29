@@ -1,0 +1,136 @@
+Vesta static timing analysis, pin-to-register and register-to-pin minimum timing
+
+Top 20 minimum delay paths:
+Path input pin ext_wakeup_in to DFFSR_76/D delay 56.7708 ps
+      0.0 ps  ext_wakeup_in:   -> DFFSR_76/D
+
+   hold at destination = 56.7708
+
+Path input pin rtc_wakeup_in to DFFSR_34/D delay 56.7708 ps
+      0.0 ps  rtc_wakeup_in:   -> DFFSR_34/D
+
+   hold at destination = 56.7708
+
+Path input pin irq_wakeup_in to DFFSR_36/D delay 56.7708 ps
+      0.0 ps  irq_wakeup_in:   -> DFFSR_36/D
+
+   hold at destination = 56.7708
+
+Path input pin reg_wdata[2] to DFFSR_579/D delay 76.6665 ps
+      0.0 ps  reg_wdata[2]:              -> AOI22X1_26/A
+     98.1 ps     _1636__2_: AOI22X1_26/Y ->  DFFSR_579/D
+
+   hold at destination = -21.3862
+
+Path input pin reg_wdata[1] to DFFSR_583/D delay 76.6665 ps
+      0.0 ps  reg_wdata[1]:              -> AOI22X1_17/A
+     98.1 ps     _1636__1_: AOI22X1_17/Y ->  DFFSR_583/D
+
+   hold at destination = -21.3862
+
+Path input pin reg_wdata[0] to DFFSR_685/D delay 76.6665 ps
+      0.0 ps  reg_wdata[0]:             -> AOI22X1_1/A
+     98.1 ps     _1636__0_: AOI22X1_1/Y -> DFFSR_685/D
+
+   hold at destination = -21.3862
+
+Path input pin pwdata[18] to DFFSR_475/D delay 141.064 ps
+      0.0 ps  pwdata[18]:               -> NAND2X1_293/A
+     70.6 ps      _1283_: NAND2X1_293/Y -> OAI21X1_483/C
+    134.1 ps       _766_: OAI21X1_483/Y ->   DFFSR_475/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[16] to DFFSR_480/D delay 141.064 ps
+      0.0 ps  pwdata[16]:               -> NAND2X1_291/A
+     70.6 ps      _1281_: NAND2X1_291/Y -> OAI21X1_481/C
+    134.1 ps       _764_: OAI21X1_481/Y ->   DFFSR_480/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[11] to DFFSR_485/D delay 141.064 ps
+      0.0 ps  pwdata[11]:               -> NAND2X1_286/A
+     70.6 ps      _1275_: NAND2X1_286/Y -> OAI21X1_476/C
+    134.1 ps       _759_: OAI21X1_476/Y ->   DFFSR_485/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[31] to DFFSR_133/D delay 141.064 ps
+      0.0 ps  pwdata[31]:               -> NAND2X1_199/A
+     70.6 ps      _1089_: NAND2X1_199/Y -> OAI21X1_315/C
+    134.1 ps       _633_: OAI21X1_315/Y ->   DFFSR_133/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[22] to DFFSR_471/D delay 141.064 ps
+      0.0 ps  pwdata[22]:               -> NAND2X1_297/A
+     70.6 ps      _1287_: NAND2X1_297/Y -> OAI21X1_487/C
+    134.1 ps       _770_: OAI21X1_487/Y ->   DFFSR_471/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[21] to DFFSR_472/D delay 141.064 ps
+      0.0 ps  pwdata[21]:               -> NAND2X1_296/A
+     70.6 ps      _1286_: NAND2X1_296/Y -> OAI21X1_486/C
+    134.1 ps       _769_: OAI21X1_486/Y ->   DFFSR_472/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[12] to DFFSR_484/D delay 141.064 ps
+      0.0 ps  pwdata[12]:               -> NAND2X1_287/A
+     70.6 ps      _1276_: NAND2X1_287/Y -> OAI21X1_477/C
+    134.1 ps       _760_: OAI21X1_477/Y ->   DFFSR_484/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[7] to DFFSR_489/D delay 141.064 ps
+      0.0 ps  pwdata[7]:               -> NAND2X1_283/A
+     70.6 ps     _1268_: NAND2X1_283/Y -> OAI21X1_470/C
+    134.1 ps      _755_: OAI21X1_470/Y ->   DFFSR_489/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[19] to DFFSR_474/D delay 141.064 ps
+      0.0 ps  pwdata[19]:               -> NAND2X1_294/A
+     70.6 ps      _1284_: NAND2X1_294/Y -> OAI21X1_484/C
+    134.1 ps       _767_: OAI21X1_484/Y ->   DFFSR_474/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[17] to DFFSR_479/D delay 141.064 ps
+      0.0 ps  pwdata[17]:               -> NAND2X1_292/A
+     70.6 ps      _1282_: NAND2X1_292/Y -> OAI21X1_482/C
+    134.1 ps       _765_: OAI21X1_482/Y ->   DFFSR_479/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[3] to DFFSR_493/D delay 141.064 ps
+      0.0 ps  pwdata[3]:               -> NAND2X1_280/A
+     70.6 ps     _1263_: NAND2X1_280/Y -> OAI21X1_465/C
+    134.1 ps      _751_: OAI21X1_465/Y ->   DFFSR_493/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[0] to DFFSR_496/D delay 141.064 ps
+      0.0 ps  pwdata[0]:               -> NAND2X1_278/A
+     70.6 ps     _1259_: NAND2X1_278/Y -> OAI21X1_461/C
+    134.1 ps      _748_: OAI21X1_461/Y ->   DFFSR_496/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[30] to DFFSR_463/D delay 141.064 ps
+      0.0 ps  pwdata[30]:               -> NAND2X1_305/A
+     70.6 ps      _1296_: NAND2X1_305/Y -> OAI21X1_495/C
+    134.1 ps       _778_: OAI21X1_495/Y ->   DFFSR_463/D
+
+   hold at destination = 6.9532
+
+Path input pin pwdata[27] to DFFSR_466/D delay 141.064 ps
+      0.0 ps  pwdata[27]:               -> NAND2X1_302/A
+     70.6 ps      _1293_: NAND2X1_302/Y -> OAI21X1_492/C
+    134.1 ps       _775_: OAI21X1_492/Y ->   DFFSR_466/D
+
+   hold at destination = 6.9532
+
+-----------------------------------------
+

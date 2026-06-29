@@ -1,0 +1,351 @@
+// =============================================================================
+// Module      : data_processor
+// Project     : VEGA SoC
+// Description : Data Processor - Flagship RTL block in PD_PROC domain.
+//               Features:
+//                 - 4-state Controller FSM (IDLE, FETCH, EXECUTE, WRITEBACK)
+//                 - 8-entry x 32-bit Register File
+//                 - ALU (ADD, SUB, AND, OR, XOR, SHL, SHR, CMP)
+//                 - 2-stage Pipeline (EXEC -> WB)
+//                 - Memory-Mapped Interface (APB-like)
+//                 - Clock Gating Support (idle signal out)
+//                 - Interrupt Handling
+// =============================================================================
+
+`timescale 1ns/1ps
+
+module data_processor #(
+    parameter int DATA_W  = 32,
+    parameter int ADDR_W  = 8,
+    parameter int RF_DEPTH = 8          // Register file depth (8 registers)
+)(
+    input  logic                clk,
+    input  logic                rst_n,
+
+    // Clock Gate Support
+    input  logic                clk_gate_en,    // From power sequencer
+    output logic                proc_idle,       // To PMU — processor is idle
+
+    // Memory-Mapped Register Interface (APB-lite, 1 cycle latency)
+    input  logic                psel,
+    input  logic                penable,
+    input  logic                pwrite,
+    input  logic [ADDR_W-1:0]   paddr,
+    input  logic [DATA_W-1:0]   pwdata,
+    output logic [DATA_W-1:0]   prdata,
+    output logic                pready,
+    output logic                pslverr,
+
+    // Interrupt
+    input  logic                irq_in,         // External interrupt to processor
+    output logic                irq_ack         // Processor acknowledges interrupt
+);
+
+    // -------------------------------------------------------------------------
+    // Gated Clock
+    // -------------------------------------------------------------------------
+    logic clk_gated;
+    assign clk_gated = clk & ~clk_gate_en;  // Behavioral gate; ICG cell in top
+
+    // -------------------------------------------------------------------------
+    // APB Register Map
+    // -------------------------------------------------------------------------
+    // 0x00 : OP_REG    [R/W] - [3:0] opcode, [7:4] rs1, [11:8] rs2, [15:12] rd
+    // 0x04 : OPERAND_A [R/W] - Direct operand A (bypasses RF)
+    // 0x08 : OPERAND_B [R/W] - Direct operand B (bypasses RF)
+    // 0x0C : RESULT    [RO]  - Result of last operation
+    // 0x10 : STATUS    [RO]  - [0] done, [1] busy, [2] overflow, [3] irq_pending
+    // 0x14 : CTRL      [R/W] - [0] start, [1] use_rf (1=RF, 0=direct operands)
+    //                          [2] irq_en
+    // 0x18-0x34 : RF[0..7] - Register file read/write
+
+    localparam logic [ADDR_W-1:0] ADDR_OP       = 8'h00;
+    localparam logic [ADDR_W-1:0] ADDR_OPND_A   = 8'h04;
+    localparam logic [ADDR_W-1:0] ADDR_OPND_B   = 8'h08;
+    localparam logic [ADDR_W-1:0] ADDR_RESULT   = 8'h0C;
+    localparam logic [ADDR_W-1:0] ADDR_STATUS   = 8'h10;
+    localparam logic [ADDR_W-1:0] ADDR_CTRL     = 8'h14;
+    localparam logic [ADDR_W-1:0] ADDR_RF_BASE  = 8'h18;   // RF[0..7] at 0x18..0x34
+
+    // -------------------------------------------------------------------------
+    // ALU Opcodes
+    // -------------------------------------------------------------------------
+    typedef enum logic [3:0] {
+        ALU_ADD = 4'h0,
+        ALU_SUB = 4'h1,
+        ALU_AND = 4'h2,
+        ALU_OR  = 4'h3,
+        ALU_XOR = 4'h4,
+        ALU_SHL = 4'h5,
+        ALU_SHR = 4'h6,
+        ALU_CMP = 4'h7,    // Result = (A == B) ? 1 : 0
+        ALU_NOP = 4'hF
+    } alu_op_t;
+
+    // -------------------------------------------------------------------------
+    // Controller FSM
+    // -------------------------------------------------------------------------
+    typedef enum logic [2:0] {
+        PROC_IDLE    = 3'h0,
+        PROC_FETCH   = 3'h1,
+        PROC_EXECUTE = 3'h2,
+        PROC_WB      = 3'h3,
+        PROC_IRQ     = 3'h4
+    } proc_state_t;
+
+    proc_state_t state, next_state;
+
+    // -------------------------------------------------------------------------
+    // Register File
+    // -------------------------------------------------------------------------
+    logic [DATA_W-1:0] regfile [0:RF_DEPTH-1];
+
+    // -------------------------------------------------------------------------
+    // Control Registers (APB-accessible)
+    // -------------------------------------------------------------------------
+    logic [DATA_W-1:0] op_reg;
+    logic [DATA_W-1:0] operand_a_reg;
+    logic [DATA_W-1:0] operand_b_reg;
+    logic [DATA_W-1:0] result_reg;
+    logic [DATA_W-1:0] ctrl_reg;
+
+    // Decoded fields from op_reg
+    alu_op_t  opcode;
+    logic [2:0] rs1_idx, rs2_idx, rd_idx;
+
+    assign opcode  = alu_op_t'(op_reg[3:0]);
+    assign rs1_idx = op_reg[6:4];
+    assign rs2_idx = op_reg[10:8];
+    assign rd_idx  = op_reg[14:12];
+
+    // -------------------------------------------------------------------------
+    // Pipeline Stage 1: EXECUTE
+    // -------------------------------------------------------------------------
+    logic [DATA_W-1:0] alu_a, alu_b;
+    logic [DATA_W-1:0] alu_result;
+    logic              alu_overflow;
+    logic [DATA_W-1:0] pipe_result;     // EX -> WB pipeline register
+    logic [2:0]        pipe_rd_idx;
+    logic              pipe_valid;
+    alu_op_t           pipe_opcode;
+
+    // Operand select: RF or direct
+    always_comb begin
+        if (ctrl_reg[1]) begin  // use_rf
+            alu_a = regfile[rs1_idx];
+            alu_b = regfile[rs2_idx];
+        end else begin
+            alu_a = operand_a_reg;
+            alu_b = operand_b_reg;
+        end
+    end
+
+    // ALU
+    always_comb begin
+        alu_result   = '0;
+        alu_overflow = 1'b0;
+        case (opcode)
+            ALU_ADD: begin
+                {alu_overflow, alu_result} = {1'b0, alu_a} + {1'b0, alu_b};
+            end
+            ALU_SUB: begin
+                {alu_overflow, alu_result} = {1'b0, alu_a} - {1'b0, alu_b};
+            end
+            ALU_AND: alu_result = alu_a & alu_b;
+            ALU_OR:  alu_result = alu_a | alu_b;
+            ALU_XOR: alu_result = alu_a ^ alu_b;
+            ALU_SHL: alu_result = alu_a << alu_b[4:0];
+            ALU_SHR: alu_result = alu_a >> alu_b[4:0];
+            ALU_CMP: alu_result = (alu_a == alu_b) ? 32'h1 : 32'h0;
+            default: alu_result = '0;
+        endcase
+    end
+
+    // -------------------------------------------------------------------------
+    // Pipeline Register (EX -> WB)
+    // -------------------------------------------------------------------------
+    always_ff @(posedge clk_gated or negedge rst_n) begin
+        if (!rst_n) begin
+            pipe_result  <= '0;
+            pipe_rd_idx  <= '0;
+            pipe_valid   <= 1'b0;
+            pipe_opcode  <= ALU_NOP;
+        end else if (state == PROC_EXECUTE) begin
+            pipe_result  <= alu_result;
+            pipe_rd_idx  <= rd_idx;
+            pipe_valid   <= 1'b1;
+            pipe_opcode  <= opcode;
+        end else begin
+            pipe_valid   <= 1'b0;
+        end
+    end
+
+    // -------------------------------------------------------------------------
+    // IRQ Handling
+    // -------------------------------------------------------------------------
+    logic irq_pending;
+    logic irq_en;
+    assign irq_en = ctrl_reg[2];
+
+    always_ff @(posedge clk_gated or negedge rst_n) begin
+        if (!rst_n)
+            irq_pending <= 1'b0;
+        else if (irq_in && irq_en)
+            irq_pending <= 1'b1;
+        else if (state == PROC_IRQ)
+            irq_pending <= 1'b0;
+    end
+
+    // -------------------------------------------------------------------------
+    // Overflow / Status flags
+    // -------------------------------------------------------------------------
+    logic overflow_flag;
+    logic op_done;
+
+    always_ff @(posedge clk_gated or negedge rst_n) begin
+        if (!rst_n) begin
+            overflow_flag <= 1'b0;
+            op_done       <= 1'b0;
+        end else begin
+            if (state == PROC_EXECUTE)
+                overflow_flag <= alu_overflow;
+            op_done <= (state == PROC_WB);
+        end
+    end
+
+    // -------------------------------------------------------------------------
+    // FSM Sequential
+    // -------------------------------------------------------------------------
+    always_ff @(posedge clk_gated or negedge rst_n) begin
+        if (!rst_n) state <= PROC_IDLE;
+        else        state <= next_state;
+    end
+
+    // -------------------------------------------------------------------------
+    // FSM Combinational
+    // -------------------------------------------------------------------------
+    logic start_pulse;
+    assign start_pulse = ctrl_reg[0];
+
+    always_comb begin
+        next_state = state;
+        irq_ack    = 1'b0;
+
+        case (state)
+            PROC_IDLE: begin
+                if (irq_pending)
+                    next_state = PROC_IRQ;
+                else if (start_pulse)
+                    next_state = PROC_FETCH;
+            end
+
+            PROC_FETCH: begin
+                next_state = PROC_EXECUTE;
+            end
+
+            PROC_EXECUTE: begin
+                next_state = PROC_WB;
+            end
+
+            PROC_WB: begin
+                next_state = PROC_IDLE;
+            end
+
+            PROC_IRQ: begin
+                irq_ack    = 1'b1;
+                next_state = PROC_IDLE;
+            end
+
+            default: next_state = PROC_IDLE;
+        endcase
+    end
+
+    // -------------------------------------------------------------------------
+    // Unified Register Write Block
+    // Single always_ff owns: regfile, result_reg, op_reg, operand regs, ctrl_reg
+    // Priority: APB write > WB writeback > auto-clear
+    // -------------------------------------------------------------------------
+    int wr_rf_idx;
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            for (int i = 0; i < RF_DEPTH; i++)
+                regfile[i] <= '0;
+            result_reg    <= '0;
+            op_reg        <= '0;
+            operand_a_reg <= '0;
+            operand_b_reg <= '0;
+            ctrl_reg      <= '0;
+        end else begin
+            // --- APB Write (highest priority) ---
+            if (psel && penable && pwrite) begin
+                case (paddr)
+                    ADDR_OP:     op_reg        <= pwdata;
+                    ADDR_OPND_A: operand_a_reg <= pwdata;
+                    ADDR_OPND_B: operand_b_reg <= pwdata;
+                    ADDR_CTRL:   ctrl_reg      <= pwdata;
+                    default: begin
+                        if (paddr >= ADDR_RF_BASE &&
+                            paddr <  (ADDR_RF_BASE + ADDR_W'(RF_DEPTH * 4))) begin
+                            wr_rf_idx = int'(paddr - ADDR_RF_BASE) >> 2;
+                            regfile[wr_rf_idx] <= pwdata;
+                        end
+                    end
+                endcase
+            end else begin
+                // Auto-clear start bit after one cycle
+                ctrl_reg[0] <= 1'b0;
+
+                // --- Writeback from pipeline ---
+                if (pipe_valid && (state == PROC_WB)) begin
+                    result_reg <= pipe_result;
+                    if (ctrl_reg[1])
+                        regfile[pipe_rd_idx] <= pipe_result;
+                end
+            end
+        end
+    end
+
+    // -------------------------------------------------------------------------
+    // APB Read
+    // -------------------------------------------------------------------------
+    int rd_rf_idx;
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            prdata  <= '0;
+            pready  <= 1'b0;
+            pslverr <= 1'b0;
+        end else begin
+            pready  <= psel & penable;
+            pslverr <= 1'b0;
+            prdata  <= '0;
+            if (psel && penable && !pwrite) begin
+                case (paddr)
+                    ADDR_OP:     prdata <= op_reg;
+                    ADDR_OPND_A: prdata <= operand_a_reg;
+                    ADDR_OPND_B: prdata <= operand_b_reg;
+                    ADDR_RESULT: prdata <= result_reg;
+                    ADDR_STATUS: prdata <= {28'b0, irq_pending, overflow_flag,
+                                            (state != PROC_IDLE), op_done};
+                    ADDR_CTRL:   prdata <= ctrl_reg;
+                    default: begin
+                        if (paddr >= ADDR_RF_BASE && paddr < (ADDR_RF_BASE + RF_DEPTH*4)) begin
+                            rd_rf_idx = (paddr - ADDR_RF_BASE) >> 2;
+                            prdata <= regfile[rd_rf_idx];
+                        end else begin
+                            prdata  <= 32'hDEAD_BEEF;
+                            pslverr <= 1'b1;
+                        end
+                    end
+                endcase
+            end
+        end
+    end
+
+    // -------------------------------------------------------------------------
+    // Idle Output for PMU
+    // -------------------------------------------------------------------------
+    assign proc_idle = (state == PROC_IDLE);
+
+endmodule : data_processor

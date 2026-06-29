@@ -1,0 +1,1308 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.64+26 (git sha1 a54bca549, clang++ 14.0.0-1ubuntu1.1 -fPIC -O3)
+
+-- Running command `
+read_verilog -sv icg_cells.sv pmu_fsm.sv wakeup_ctrl.sv power_sequencer.sv retention_ctrl.sv sensor_regbank.sv data_processor.sv vega_top.sv;
+hierarchy -check -top vega_top;
+proc; opt;
+write_verilog -noattr /home/lab-user/vega/vega_synth_check.v
+' --
+
+1. Executing Verilog-2005 frontend: icg_cells.sv
+Parsing SystemVerilog input from `icg_cells.sv' to AST representation.
+Generating RTLIL representation for module `\icg_cell'.
+Generating RTLIL representation for module `\iso_cell'.
+Generating RTLIL representation for module `\lvlshift_cell'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: pmu_fsm.sv
+Parsing SystemVerilog input from `pmu_fsm.sv' to AST representation.
+Generating RTLIL representation for module `\pmu_fsm'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: wakeup_ctrl.sv
+Parsing SystemVerilog input from `wakeup_ctrl.sv' to AST representation.
+Generating RTLIL representation for module `\wakeup_ctrl'.
+Successfully finished Verilog frontend.
+
+4. Executing Verilog-2005 frontend: power_sequencer.sv
+Parsing SystemVerilog input from `power_sequencer.sv' to AST representation.
+Generating RTLIL representation for module `\power_sequencer'.
+Successfully finished Verilog frontend.
+
+5. Executing Verilog-2005 frontend: retention_ctrl.sv
+Parsing SystemVerilog input from `retention_ctrl.sv' to AST representation.
+Generating RTLIL representation for module `\retention_ctrl'.
+Successfully finished Verilog frontend.
+
+6. Executing Verilog-2005 frontend: sensor_regbank.sv
+Parsing SystemVerilog input from `sensor_regbank.sv' to AST representation.
+Generating RTLIL representation for module `\sensor_regbank'.
+Successfully finished Verilog frontend.
+
+7. Executing Verilog-2005 frontend: data_processor.sv
+Parsing SystemVerilog input from `data_processor.sv' to AST representation.
+Generating RTLIL representation for module `\data_processor'.
+Warning: Replacing memory \regfile with list of registers. See data_processor.sv:273
+Successfully finished Verilog frontend.
+
+8. Executing Verilog-2005 frontend: vega_top.sv
+Parsing SystemVerilog input from `vega_top.sv' to AST representation.
+Generating RTLIL representation for module `\vega_top'.
+Successfully finished Verilog frontend.
+
+9. Executing HIERARCHY pass (managing design hierarchy).
+
+9.1. Analyzing design hierarchy..
+Top module:  \vega_top
+Used module:     \iso_cell
+Used module:     \data_processor
+Used module:     \icg_cell
+Used module:     \sensor_regbank
+Used module:     \retention_ctrl
+Used module:     \power_sequencer
+Used module:     \wakeup_ctrl
+Used module:     \pmu_fsm
+Parameter \DATA_W = 32
+Parameter \ADDR_W = 8
+
+9.2. Executing AST frontend in derive mode using pre-parsed AST for module `\data_processor'.
+Parameter \DATA_W = 32
+Parameter \ADDR_W = 8
+Generating RTLIL representation for module `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Warning: Replacing memory \regfile with list of registers. See data_processor.sv:273
+Parameter \TIMEOUT_WIDTH = 16
+Parameter \TIMEOUT_VAL = 1000
+
+9.3. Executing AST frontend in derive mode using pre-parsed AST for module `\pmu_fsm'.
+Parameter \TIMEOUT_WIDTH = 16
+Parameter \TIMEOUT_VAL = 1000
+Generating RTLIL representation for module `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+
+9.4. Analyzing design hierarchy..
+Top module:  \vega_top
+Used module:     \iso_cell
+Used module:     $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor
+Used module:     \icg_cell
+Used module:     \sensor_regbank
+Used module:     \retention_ctrl
+Used module:     \power_sequencer
+Used module:     \wakeup_ctrl
+Used module:     $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm
+
+9.5. Analyzing design hierarchy..
+Top module:  \vega_top
+Used module:     \iso_cell
+Used module:     $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor
+Used module:     \icg_cell
+Used module:     \sensor_regbank
+Used module:     \retention_ctrl
+Used module:     \power_sequencer
+Used module:     \wakeup_ctrl
+Used module:     $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm
+Removing unused module `\data_processor'.
+Removing unused module `\pmu_fsm'.
+Removing unused module `\lvlshift_cell'.
+Removed 3 unused modules.
+
+10. Executing PROC pass (convert processes to netlists).
+
+10.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+10.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 12 switch rules as full_case in process $proc$pmu_fsm.sv:114$301 in module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+Marked 1 switch rules as full_case in process $proc$pmu_fsm.sv:104$299 in module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+Marked 2 switch rules as full_case in process $proc$pmu_fsm.sv:89$294 in module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+Marked 2 switch rules as full_case in process $proc$pmu_fsm.sv:71$289 in module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+Marked 2 switch rules as full_case in process $proc$sensor_regbank.sv:143$82 in module sensor_regbank.
+Marked 1 switch rules as full_case in process $proc$sensor_regbank.sv:119$80 in module sensor_regbank.
+Marked 1 switch rules as full_case in process $proc$sensor_regbank.sv:99$76 in module sensor_regbank.
+Marked 1 switch rules as full_case in process $proc$sensor_regbank.sv:82$71 in module sensor_regbank.
+Marked 1 switch rules as full_case in process $proc$retention_ctrl.sv:129$69 in module retention_ctrl.
+Marked 7 switch rules as full_case in process $proc$retention_ctrl.sv:77$66 in module retention_ctrl.
+Marked 1 switch rules as full_case in process $proc$retention_ctrl.sv:66$64 in module retention_ctrl.
+Marked 2 switch rules as full_case in process $proc$retention_ctrl.sv:51$58 in module retention_ctrl.
+Marked 13 switch rules as full_case in process $proc$power_sequencer.sv:95$55 in module power_sequencer.
+Marked 1 switch rules as full_case in process $proc$power_sequencer.sv:87$53 in module power_sequencer.
+Marked 2 switch rules as full_case in process $proc$power_sequencer.sv:73$48 in module power_sequencer.
+Marked 2 switch rules as full_case in process $proc$wakeup_ctrl.sv:82$41 in module wakeup_ctrl.
+Marked 1 switch rules as full_case in process $proc$wakeup_ctrl.sv:59$33 in module wakeup_ctrl.
+Marked 1 switch rules as full_case in process $proc$wakeup_ctrl.sv:41$31 in module wakeup_ctrl.
+Removed 1 dead cases from process $proc$data_processor.sv:314$265 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Marked 5 switch rules as full_case in process $proc$data_processor.sv:314$265 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Marked 8 switch rules as full_case in process $proc$data_processor.sv:270$232 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Marked 3 switch rules as full_case in process $proc$data_processor.sv:230$231 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Marked 1 switch rules as full_case in process $proc$data_processor.sv:219$229 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Marked 1 switch rules as full_case in process $proc$data_processor.sv:205$225 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Marked 2 switch rules as full_case in process $proc$data_processor.sv:190$221 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Marked 2 switch rules as full_case in process $proc$data_processor.sv:167$218 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Marked 1 switch rules as full_case in process $proc$data_processor.sv:144$208 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Removed 2 dead cases from process $proc$data_processor.sv:133$197 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Marked 3 switch rules as full_case in process $proc$data_processor.sv:133$197 in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Removed a total of 3 dead cases.
+
+10.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 29 redundant assignments.
+Promoted 43 assignments to connections.
+
+10.4. Executing PROC_INIT pass (extract init attributes).
+
+10.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \rst_n in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:104$299'.
+Found async reset \rst_n in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:89$294'.
+Found async reset \rst_n in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:71$289'.
+Found async reset \rst_n in `\sensor_regbank.$proc$sensor_regbank.sv:143$82'.
+Found async reset \rst_n in `\sensor_regbank.$proc$sensor_regbank.sv:119$80'.
+Found async reset \rst_n in `\sensor_regbank.$proc$sensor_regbank.sv:99$76'.
+Found async reset \rst_n in `\sensor_regbank.$proc$sensor_regbank.sv:82$71'.
+Found async reset \rst_n in `\retention_ctrl.$proc$retention_ctrl.sv:129$69'.
+Found async reset \rst_n in `\retention_ctrl.$proc$retention_ctrl.sv:66$64'.
+Found async reset \rst_n in `\retention_ctrl.$proc$retention_ctrl.sv:51$58'.
+Found async reset \rst_n in `\power_sequencer.$proc$power_sequencer.sv:87$53'.
+Found async reset \rst_n in `\power_sequencer.$proc$power_sequencer.sv:73$48'.
+Found async reset \rst_n in `\wakeup_ctrl.$proc$wakeup_ctrl.sv:82$41'.
+Found async reset \rst_n in `\wakeup_ctrl.$proc$wakeup_ctrl.sv:59$33'.
+Found async reset \rst_n in `\wakeup_ctrl.$proc$wakeup_ctrl.sv:41$31'.
+Found async reset \rst_n in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:314$265'.
+Found async reset \rst_n in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+Found async reset \rst_n in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:219$229'.
+Found async reset \rst_n in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:205$225'.
+Found async reset \rst_n in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:190$221'.
+Found async reset \rst_n in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:167$218'.
+
+10.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~73 debug messages>
+
+10.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:193$309'.
+Creating decoders for process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:114$301'.
+     1/16: $12\next_state[3:0]
+     2/16: $11\next_state[3:0]
+     3/16: $10\next_state[3:0]
+     4/16: $9\next_state[3:0]
+     5/16: $8\next_state[3:0]
+     6/16: $7\next_state[3:0]
+     7/16: $6\next_state[3:0]
+     8/16: $2\seq_sleep_cmd[0:0]
+     9/16: $5\next_state[3:0]
+    10/16: $4\next_state[3:0]
+    11/16: $3\next_state[3:0]
+    12/16: $2\next_state[3:0]
+    13/16: $1\next_state[3:0]
+    14/16: $1\timeout_en[0:0]
+    15/16: $1\seq_wakeup_cmd[0:0]
+    16/16: $1\seq_sleep_cmd[0:0]
+Creating decoders for process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:104$299'.
+     1/1: $0\state[3:0]
+Creating decoders for process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:89$294'.
+     1/1: $0\boot_cnt[7:0]
+Creating decoders for process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:71$289'.
+     1/1: $0\timeout_cnt[15:0]
+Creating decoders for process `\sensor_regbank.$proc$sensor_regbank.sv:143$82'.
+     1/2: $0\reg_rdata[31:0]
+     2/2: $0\reg_ack[0:0]
+Creating decoders for process `\sensor_regbank.$proc$sensor_regbank.sv:119$80'.
+     1/6: $0\pwr_ctrl_reg[31:0]
+     2/6: $0\irq_thresh2_reg[31:0]
+     3/6: $0\irq_thresh1_reg[31:0]
+     4/6: $0\irq_thresh0_reg[31:0]
+     5/6: $0\irq_mask_reg[31:0]
+     6/6: $0\ctrl_reg[31:0]
+Creating decoders for process `\sensor_regbank.$proc$sensor_regbank.sv:99$76'.
+     1/4: $0\irq_status_reg[31:0] [31:3]
+     2/4: $0\irq_status_reg[31:0] [2]
+     3/4: $0\irq_status_reg[31:0] [1]
+     4/4: $0\irq_status_reg[31:0] [0]
+Creating decoders for process `\sensor_regbank.$proc$sensor_regbank.sv:82$71'.
+     1/1: $0\sensor_valid[0:0]
+Creating decoders for process `\retention_ctrl.$proc$retention_ctrl.sv:129$69'.
+     1/4: $0\context_valid[0:0]
+     2/4: $0\context_saved[0:0]
+     3/4: $0\ret_restore_done[0:0]
+     4/4: $0\ret_save_done[0:0]
+Creating decoders for process `\retention_ctrl.$proc$retention_ctrl.sv:77$66'.
+     1/12: $7\next_state[2:0]
+     2/12: $6\next_state[2:0]
+     3/12: $5\next_state[2:0]
+     4/12: $4\next_state[2:0]
+     5/12: $3\next_state[2:0]
+     6/12: $2\next_state[2:0]
+     7/12: $1\next_state[2:0]
+     8/12: $1\ctx_valid_next[0:0]
+     9/12: $1\ctx_saved_next[0:0]
+    10/12: $1\restore_done_next[0:0]
+    11/12: $1\save_done_next[0:0]
+    12/12: $1\op_cnt_en[0:0]
+Creating decoders for process `\retention_ctrl.$proc$retention_ctrl.sv:66$64'.
+     1/1: $0\state[2:0]
+Creating decoders for process `\retention_ctrl.$proc$retention_ctrl.sv:51$58'.
+     1/1: $0\op_cnt[3:0]
+Creating decoders for process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+     1/21: $13\next_state[3:0]
+     2/21: $12\next_state[3:0]
+     3/21: $11\next_state[3:0]
+     4/21: $10\next_state[3:0]
+     5/21: $9\next_state[3:0]
+     6/21: $8\next_state[3:0]
+     7/21: $7\next_state[3:0]
+     8/21: $6\next_state[3:0]
+     9/21: $5\next_state[3:0]
+    10/21: $4\next_state[3:0]
+    11/21: $3\next_state[3:0]
+    12/21: $2\next_state[3:0]
+    13/21: $1\next_state[3:0]
+    14/21: $1\step_cnt_en[0:0]
+    15/21: $1\pwr_sw_off[0:0]
+    16/21: $1\clk_gate_en[0:0]
+    17/21: $1\ret_restore_en[0:0]
+    18/21: $1\ret_save_en[0:0]
+    19/21: $1\seq_wakeup_ack[0:0]
+    20/21: $1\seq_sleep_ack[0:0]
+    21/21: $1\iso_en[0:0]
+Creating decoders for process `\power_sequencer.$proc$power_sequencer.sv:87$53'.
+     1/1: $0\state[3:0]
+Creating decoders for process `\power_sequencer.$proc$power_sequencer.sv:73$48'.
+     1/1: $0\step_cnt[3:0]
+Creating decoders for process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:82$41'.
+     1/3: $0\wakeup_irq_lat[0:0]
+     2/3: $0\wakeup_rtc_lat[0:0]
+     3/3: $0\wakeup_ext_lat[0:0]
+Creating decoders for process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:59$33'.
+     1/3: $0\irq_prev[0:0]
+     2/3: $0\rtc_prev[0:0]
+     3/3: $0\ext_prev[0:0]
+Creating decoders for process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:41$31'.
+     1/6: $0\irq_sync_1[0:0]
+     2/6: $0\irq_sync_0[0:0]
+     3/6: $0\rtc_sync_1[0:0]
+     4/6: $0\rtc_sync_0[0:0]
+     5/6: $0\ext_sync_1[0:0]
+     6/6: $0\ext_sync_0[0:0]
+Creating decoders for process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:314$265'.
+     1/16: $5$mem2reg_rd$\regfile$data_processor.sv:335$194_DATA[31:0]$287
+     2/16: $4$mem2reg_rd$\regfile$data_processor.sv:335$194_DATA[31:0]$284
+     3/16: $4$mem2reg_rd$\regfile$data_processor.sv:335$194_ADDR[2:0]$283
+     4/16: $4\rd_rf_idx[31:0]
+     5/16: $3$mem2reg_rd$\regfile$data_processor.sv:335$194_DATA[31:0]$278
+     6/16: $3$mem2reg_rd$\regfile$data_processor.sv:335$194_ADDR[2:0]$277
+     7/16: $3\rd_rf_idx[31:0]
+     8/16: $2$mem2reg_rd$\regfile$data_processor.sv:335$194_DATA[31:0]$276
+     9/16: $2$mem2reg_rd$\regfile$data_processor.sv:335$194_ADDR[2:0]$275
+    10/16: $2\rd_rf_idx[31:0]
+    11/16: $1$mem2reg_rd$\regfile$data_processor.sv:335$194_DATA[31:0]$270
+    12/16: $1$mem2reg_rd$\regfile$data_processor.sv:335$194_ADDR[2:0]$269
+    13/16: $1\rd_rf_idx[31:0]
+    14/16: $0\prdata[31:0]
+    15/16: $0\pslverr[0:0]
+    16/16: $0\pready[0:0]
+Creating decoders for process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+     1/35: $4$mem2reg_wr$\regfile$data_processor.sv:303$193_ADDR[2:0]$263
+     2/35: $4$mem2reg_wr$\regfile$data_processor.sv:303$193_DATA[31:0]$264
+     3/35: $3$mem2reg_wr$\regfile$data_processor.sv:303$193_DATA[31:0]$262
+     4/35: $3$mem2reg_wr$\regfile$data_processor.sv:303$193_ADDR[2:0]$261
+     5/35: $0\ctrl_reg[31:0] [31:1]
+     6/35: $0\ctrl_reg[31:0] [0]
+     7/35: $4$mem2reg_wr$\regfile$data_processor.sv:291$192_DATA[31:0]$256
+     8/35: $4\wr_rf_idx[31:0]
+     9/35: $3$mem2reg_wr$\regfile$data_processor.sv:291$192_DATA[31:0]$251
+    10/35: $3$mem2reg_wr$\regfile$data_processor.sv:291$192_ADDR[2:0]$250
+    11/35: $3\wr_rf_idx[31:0]
+    12/35: $2$mem2reg_wr$\regfile$data_processor.sv:291$192_DATA[31:0]$247
+    13/35: $2$mem2reg_wr$\regfile$data_processor.sv:291$192_ADDR[2:0]$246
+    14/35: $2\wr_rf_idx[31:0]
+    15/35: $2$mem2reg_wr$\regfile$data_processor.sv:303$193_DATA[31:0]$249
+    16/35: $2$mem2reg_wr$\regfile$data_processor.sv:303$193_ADDR[2:0]$248
+    17/35: $1$mem2reg_wr$\regfile$data_processor.sv:303$193_DATA[31:0]$243
+    18/35: $1$mem2reg_wr$\regfile$data_processor.sv:303$193_ADDR[2:0]$242
+    19/35: $1$mem2reg_wr$\regfile$data_processor.sv:291$192_DATA[31:0]$241
+    20/35: $1$mem2reg_wr$\regfile$data_processor.sv:291$192_ADDR[2:0]$240
+    21/35: $1\wr_rf_idx[31:0]
+    22/35: $1$fordecl_block$88.i[31:0]$239
+    23/35: $0\regfile[7][31:0]
+    24/35: $0\regfile[6][31:0]
+    25/35: $0\regfile[5][31:0]
+    26/35: $0\regfile[4][31:0]
+    27/35: $0\regfile[3][31:0]
+    28/35: $0\regfile[2][31:0]
+    29/35: $0\regfile[1][31:0]
+    30/35: $0\regfile[0][31:0]
+    31/35: $0\result_reg[31:0]
+    32/35: $0\operand_b_reg[31:0]
+    33/35: $0\operand_a_reg[31:0]
+    34/35: $0\op_reg[31:0]
+    35/35: $4$mem2reg_wr$\regfile$data_processor.sv:291$192_ADDR[2:0]$255
+Creating decoders for process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:230$231'.
+     1/4: $3\next_state[2:0]
+     2/4: $2\next_state[2:0]
+     3/4: $1\next_state[2:0]
+     4/4: $1\irq_ack[0:0]
+Creating decoders for process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:219$229'.
+     1/1: $0\state[2:0]
+Creating decoders for process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:205$225'.
+     1/2: $0\op_done[0:0]
+     2/2: $0\overflow_flag[0:0]
+Creating decoders for process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:190$221'.
+     1/1: $0\irq_pending[0:0]
+Creating decoders for process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:167$218'.
+     1/4: $0\pipe_valid[0:0]
+     2/4: $0\pipe_opcode[3:0]
+     3/4: $0\pipe_rd_idx[2:0]
+     4/4: $0\pipe_result[31:0]
+Creating decoders for process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:144$208'.
+     1/2: $1\alu_overflow[0:0]
+     2/2: $1\alu_result[31:0]
+Creating decoders for process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:133$197'.
+     1/8: $2$mem2reg_rd$\regfile$data_processor.sv:136$191_DATA[31:0]$207
+     2/8: $2$mem2reg_rd$\regfile$data_processor.sv:135$190_DATA[31:0]$206
+     3/8: $1\alu_b[31:0]
+     4/8: $1$mem2reg_rd$\regfile$data_processor.sv:136$191_DATA[31:0]$205
+     5/8: $1$mem2reg_rd$\regfile$data_processor.sv:136$191_ADDR[2:0]$204
+     6/8: $1\alu_a[31:0]
+     7/8: $1$mem2reg_rd$\regfile$data_processor.sv:135$190_DATA[31:0]$203
+     8/8: $1$mem2reg_rd$\regfile$data_processor.sv:135$190_ADDR[2:0]$202
+
+10.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\pmu_active' from process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:193$309'.
+No latch inferred for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\pmu_sleeping' from process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:193$309'.
+No latch inferred for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\pmu_fault' from process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:193$309'.
+No latch inferred for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\pmu_state_out' from process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:193$309'.
+No latch inferred for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\seq_sleep_cmd' from process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:114$301'.
+No latch inferred for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\seq_wakeup_cmd' from process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:114$301'.
+No latch inferred for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\next_state' from process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:114$301'.
+No latch inferred for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\timeout_en' from process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:114$301'.
+No latch inferred for signal `\retention_ctrl.\next_state' from process `\retention_ctrl.$proc$retention_ctrl.sv:77$66'.
+No latch inferred for signal `\retention_ctrl.\op_cnt_en' from process `\retention_ctrl.$proc$retention_ctrl.sv:77$66'.
+No latch inferred for signal `\retention_ctrl.\save_done_next' from process `\retention_ctrl.$proc$retention_ctrl.sv:77$66'.
+No latch inferred for signal `\retention_ctrl.\restore_done_next' from process `\retention_ctrl.$proc$retention_ctrl.sv:77$66'.
+No latch inferred for signal `\retention_ctrl.\ctx_saved_next' from process `\retention_ctrl.$proc$retention_ctrl.sv:77$66'.
+No latch inferred for signal `\retention_ctrl.\ctx_valid_next' from process `\retention_ctrl.$proc$retention_ctrl.sv:77$66'.
+No latch inferred for signal `\power_sequencer.\iso_en' from process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+No latch inferred for signal `\power_sequencer.\seq_sleep_ack' from process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+No latch inferred for signal `\power_sequencer.\seq_wakeup_ack' from process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+No latch inferred for signal `\power_sequencer.\next_state' from process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+No latch inferred for signal `\power_sequencer.\ret_save_en' from process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+No latch inferred for signal `\power_sequencer.\ret_restore_en' from process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+No latch inferred for signal `\power_sequencer.\clk_gate_en' from process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+No latch inferred for signal `\power_sequencer.\pwr_sw_off' from process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+No latch inferred for signal `\power_sequencer.\lvl_shift_en' from process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+No latch inferred for signal `\power_sequencer.\step_cnt_en' from process `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+No latch inferred for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\next_state' from process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:230$231'.
+No latch inferred for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\irq_ack' from process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:230$231'.
+No latch inferred for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\alu_result' from process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:144$208'.
+No latch inferred for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\alu_overflow' from process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:144$208'.
+No latch inferred for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\alu_a' from process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:133$197'.
+No latch inferred for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\alu_b' from process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:133$197'.
+No latch inferred for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$mem2reg_rd$\regfile$data_processor.sv:135$190_ADDR' from process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:133$197'.
+No latch inferred for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$mem2reg_rd$\regfile$data_processor.sv:135$190_DATA' from process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:133$197'.
+No latch inferred for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$mem2reg_rd$\regfile$data_processor.sv:136$191_ADDR' from process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:133$197'.
+No latch inferred for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$mem2reg_rd$\regfile$data_processor.sv:136$191_DATA' from process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:133$197'.
+
+10.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\state' using process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:104$299'.
+  created $adff cell `$procdff$1520' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\boot_cnt' using process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:89$294'.
+  created $adff cell `$procdff$1525' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.\timeout_cnt' using process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:71$289'.
+  created $adff cell `$procdff$1530' with positive edge clock and positive level reset.
+Creating register for signal `\sensor_regbank.\reg_rdata' using process `\sensor_regbank.$proc$sensor_regbank.sv:143$82'.
+  created $adff cell `$procdff$1535' with positive edge clock and positive level reset.
+Creating register for signal `\sensor_regbank.\reg_ack' using process `\sensor_regbank.$proc$sensor_regbank.sv:143$82'.
+  created $adff cell `$procdff$1540' with positive edge clock and positive level reset.
+Creating register for signal `\sensor_regbank.\ctrl_reg' using process `\sensor_regbank.$proc$sensor_regbank.sv:119$80'.
+  created $adff cell `$procdff$1545' with positive edge clock and positive level reset.
+Creating register for signal `\sensor_regbank.\irq_mask_reg' using process `\sensor_regbank.$proc$sensor_regbank.sv:119$80'.
+  created $adff cell `$procdff$1550' with positive edge clock and positive level reset.
+Creating register for signal `\sensor_regbank.\irq_thresh0_reg' using process `\sensor_regbank.$proc$sensor_regbank.sv:119$80'.
+  created $adff cell `$procdff$1555' with positive edge clock and positive level reset.
+Creating register for signal `\sensor_regbank.\irq_thresh1_reg' using process `\sensor_regbank.$proc$sensor_regbank.sv:119$80'.
+  created $adff cell `$procdff$1560' with positive edge clock and positive level reset.
+Creating register for signal `\sensor_regbank.\irq_thresh2_reg' using process `\sensor_regbank.$proc$sensor_regbank.sv:119$80'.
+  created $adff cell `$procdff$1565' with positive edge clock and positive level reset.
+Creating register for signal `\sensor_regbank.\pwr_ctrl_reg' using process `\sensor_regbank.$proc$sensor_regbank.sv:119$80'.
+  created $adff cell `$procdff$1570' with positive edge clock and positive level reset.
+Creating register for signal `\sensor_regbank.\irq_status_reg' using process `\sensor_regbank.$proc$sensor_regbank.sv:99$76'.
+  created $adff cell `$procdff$1575' with positive edge clock and positive level reset.
+Creating register for signal `\sensor_regbank.\sensor_valid' using process `\sensor_regbank.$proc$sensor_regbank.sv:82$71'.
+  created $adff cell `$procdff$1580' with positive edge clock and positive level reset.
+Creating register for signal `\retention_ctrl.\ret_save_done' using process `\retention_ctrl.$proc$retention_ctrl.sv:129$69'.
+  created $adff cell `$procdff$1585' with positive edge clock and positive level reset.
+Creating register for signal `\retention_ctrl.\ret_restore_done' using process `\retention_ctrl.$proc$retention_ctrl.sv:129$69'.
+  created $adff cell `$procdff$1590' with positive edge clock and positive level reset.
+Creating register for signal `\retention_ctrl.\context_saved' using process `\retention_ctrl.$proc$retention_ctrl.sv:129$69'.
+  created $adff cell `$procdff$1595' with positive edge clock and positive level reset.
+Creating register for signal `\retention_ctrl.\context_valid' using process `\retention_ctrl.$proc$retention_ctrl.sv:129$69'.
+  created $adff cell `$procdff$1600' with positive edge clock and positive level reset.
+Creating register for signal `\retention_ctrl.\state' using process `\retention_ctrl.$proc$retention_ctrl.sv:66$64'.
+  created $adff cell `$procdff$1605' with positive edge clock and positive level reset.
+Creating register for signal `\retention_ctrl.\op_cnt' using process `\retention_ctrl.$proc$retention_ctrl.sv:51$58'.
+  created $adff cell `$procdff$1610' with positive edge clock and positive level reset.
+Creating register for signal `\power_sequencer.\state' using process `\power_sequencer.$proc$power_sequencer.sv:87$53'.
+  created $adff cell `$procdff$1615' with positive edge clock and positive level reset.
+Creating register for signal `\power_sequencer.\step_cnt' using process `\power_sequencer.$proc$power_sequencer.sv:73$48'.
+  created $adff cell `$procdff$1620' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\wakeup_ext_lat' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:82$41'.
+  created $adff cell `$procdff$1625' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\wakeup_rtc_lat' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:82$41'.
+  created $adff cell `$procdff$1630' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\wakeup_irq_lat' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:82$41'.
+  created $adff cell `$procdff$1635' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\ext_prev' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:59$33'.
+  created $adff cell `$procdff$1640' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\rtc_prev' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:59$33'.
+  created $adff cell `$procdff$1645' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\irq_prev' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:59$33'.
+  created $adff cell `$procdff$1650' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\ext_sync_0' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:41$31'.
+  created $adff cell `$procdff$1655' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\ext_sync_1' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:41$31'.
+  created $adff cell `$procdff$1660' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\rtc_sync_0' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:41$31'.
+  created $adff cell `$procdff$1665' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\rtc_sync_1' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:41$31'.
+  created $adff cell `$procdff$1670' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\irq_sync_0' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:41$31'.
+  created $adff cell `$procdff$1675' with positive edge clock and positive level reset.
+Creating register for signal `\wakeup_ctrl.\irq_sync_1' using process `\wakeup_ctrl.$proc$wakeup_ctrl.sv:41$31'.
+  created $adff cell `$procdff$1680' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\prdata' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:314$265'.
+  created $adff cell `$procdff$1685' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\pready' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:314$265'.
+  created $adff cell `$procdff$1690' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\pslverr' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:314$265'.
+  created $adff cell `$procdff$1695' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\rd_rf_idx' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:314$265'.
+  created $dff cell `$procdff$1702' with positive edge clock.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\ctrl_reg' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1707' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\op_reg' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1712' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\operand_a_reg' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1717' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\operand_b_reg' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1722' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\result_reg' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1727' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\wr_rf_idx' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $dff cell `$procdff$1734' with positive edge clock.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$fordecl_block$88.i' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1739' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\regfile[0]' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1744' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\regfile[1]' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1749' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\regfile[2]' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1754' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\regfile[3]' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1759' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\regfile[4]' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1764' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\regfile[5]' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1769' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\regfile[6]' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1774' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\regfile[7]' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+  created $adff cell `$procdff$1779' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\state' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:219$229'.
+  created $adff cell `$procdff$1784' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\overflow_flag' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:205$225'.
+  created $adff cell `$procdff$1789' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\op_done' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:205$225'.
+  created $adff cell `$procdff$1794' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\irq_pending' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:190$221'.
+  created $adff cell `$procdff$1799' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\pipe_result' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:167$218'.
+  created $adff cell `$procdff$1804' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\pipe_rd_idx' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:167$218'.
+  created $adff cell `$procdff$1809' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\pipe_valid' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:167$218'.
+  created $adff cell `$procdff$1814' with positive edge clock and positive level reset.
+Creating register for signal `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.\pipe_opcode' using process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:167$218'.
+  created $adff cell `$procdff$1819' with positive edge clock and positive level reset.
+
+10.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+10.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:193$309'.
+Found and cleaned up 12 empty switches in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:114$301'.
+Removing empty process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:114$301'.
+Removing empty process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:104$299'.
+Found and cleaned up 1 empty switch in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:89$294'.
+Removing empty process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:89$294'.
+Found and cleaned up 1 empty switch in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:71$289'.
+Removing empty process `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.$proc$pmu_fsm.sv:71$289'.
+Found and cleaned up 2 empty switches in `\sensor_regbank.$proc$sensor_regbank.sv:143$82'.
+Removing empty process `sensor_regbank.$proc$sensor_regbank.sv:143$82'.
+Found and cleaned up 2 empty switches in `\sensor_regbank.$proc$sensor_regbank.sv:119$80'.
+Removing empty process `sensor_regbank.$proc$sensor_regbank.sv:119$80'.
+Found and cleaned up 7 empty switches in `\sensor_regbank.$proc$sensor_regbank.sv:99$76'.
+Removing empty process `sensor_regbank.$proc$sensor_regbank.sv:99$76'.
+Removing empty process `sensor_regbank.$proc$sensor_regbank.sv:82$71'.
+Removing empty process `retention_ctrl.$proc$retention_ctrl.sv:129$69'.
+Found and cleaned up 7 empty switches in `\retention_ctrl.$proc$retention_ctrl.sv:77$66'.
+Removing empty process `retention_ctrl.$proc$retention_ctrl.sv:77$66'.
+Removing empty process `retention_ctrl.$proc$retention_ctrl.sv:66$64'.
+Found and cleaned up 1 empty switch in `\retention_ctrl.$proc$retention_ctrl.sv:51$58'.
+Removing empty process `retention_ctrl.$proc$retention_ctrl.sv:51$58'.
+Found and cleaned up 13 empty switches in `\power_sequencer.$proc$power_sequencer.sv:95$55'.
+Removing empty process `power_sequencer.$proc$power_sequencer.sv:95$55'.
+Removing empty process `power_sequencer.$proc$power_sequencer.sv:87$53'.
+Found and cleaned up 1 empty switch in `\power_sequencer.$proc$power_sequencer.sv:73$48'.
+Removing empty process `power_sequencer.$proc$power_sequencer.sv:73$48'.
+Found and cleaned up 4 empty switches in `\wakeup_ctrl.$proc$wakeup_ctrl.sv:82$41'.
+Removing empty process `wakeup_ctrl.$proc$wakeup_ctrl.sv:82$41'.
+Removing empty process `wakeup_ctrl.$proc$wakeup_ctrl.sv:59$33'.
+Removing empty process `wakeup_ctrl.$proc$wakeup_ctrl.sv:41$31'.
+Found and cleaned up 4 empty switches in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:314$265'.
+Removing empty process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:314$265'.
+Found and cleaned up 7 empty switches in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+Removing empty process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:270$232'.
+Found and cleaned up 3 empty switches in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:230$231'.
+Removing empty process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:230$231'.
+Removing empty process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:219$229'.
+Found and cleaned up 1 empty switch in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:205$225'.
+Removing empty process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:205$225'.
+Found and cleaned up 2 empty switches in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:190$221'.
+Removing empty process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:190$221'.
+Found and cleaned up 1 empty switch in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:167$218'.
+Removing empty process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:167$218'.
+Found and cleaned up 1 empty switch in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:144$208'.
+Removing empty process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:144$208'.
+Found and cleaned up 3 empty switches in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:133$197'.
+Removing empty process `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.$proc$data_processor.sv:133$197'.
+Cleaned up 73 empty switches.
+
+10.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+<suppressed ~8 debug messages>
+Optimizing module sensor_regbank.
+<suppressed ~22 debug messages>
+Optimizing module retention_ctrl.
+<suppressed ~18 debug messages>
+Optimizing module power_sequencer.
+<suppressed ~10 debug messages>
+Optimizing module wakeup_ctrl.
+<suppressed ~24 debug messages>
+Optimizing module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+<suppressed ~92 debug messages>
+Optimizing module vega_top.
+Optimizing module iso_cell.
+Optimizing module icg_cell.
+
+11. Executing OPT pass (performing simple optimizations).
+
+11.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+Optimizing module sensor_regbank.
+Optimizing module retention_ctrl.
+Optimizing module power_sequencer.
+Optimizing module wakeup_ctrl.
+Optimizing module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Optimizing module vega_top.
+Optimizing module iso_cell.
+Optimizing module icg_cell.
+
+11.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Computing hashes of 86 cells of `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Finding duplicate cells in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Computing hashes of 61 cells of `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Finding duplicate cells in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+<suppressed ~75 debug messages>
+Finding identical cells in module `\sensor_regbank'.
+Computing hashes of 73 cells of `\sensor_regbank'.
+Finding duplicate cells in `\sensor_regbank'.
+Computing hashes of 54 cells of `\sensor_regbank'.
+Finding duplicate cells in `\sensor_regbank'.
+<suppressed ~57 debug messages>
+Finding identical cells in module `\retention_ctrl'.
+Computing hashes of 59 cells of `\retention_ctrl'.
+Finding duplicate cells in `\retention_ctrl'.
+Computing hashes of 38 cells of `\retention_ctrl'.
+Finding duplicate cells in `\retention_ctrl'.
+<suppressed ~63 debug messages>
+Finding identical cells in module `\power_sequencer'.
+Computing hashes of 95 cells of `\power_sequencer'.
+Finding duplicate cells in `\power_sequencer'.
+Computing hashes of 55 cells of `\power_sequencer'.
+Finding duplicate cells in `\power_sequencer'.
+<suppressed ~120 debug messages>
+Finding identical cells in module `\wakeup_ctrl'.
+Computing hashes of 44 cells of `\wakeup_ctrl'.
+Finding duplicate cells in `\wakeup_ctrl'.
+Computing hashes of 31 cells of `\wakeup_ctrl'.
+Finding duplicate cells in `\wakeup_ctrl'.
+<suppressed ~39 debug messages>
+Finding identical cells in module `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Computing hashes of 419 cells of `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Finding duplicate cells in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Computing hashes of 266 cells of `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Finding duplicate cells in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Computing hashes of 257 cells of `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Finding duplicate cells in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+<suppressed ~486 debug messages>
+Finding identical cells in module `\vega_top'.
+Computing hashes of 41 cells of `\vega_top'.
+Finding duplicate cells in `\vega_top'.
+Finding identical cells in module `\iso_cell'.
+Computing hashes of 1 cells of `\iso_cell'.
+Finding duplicate cells in `\iso_cell'.
+Finding identical cells in module `\icg_cell'.
+Computing hashes of 2 cells of `\icg_cell'.
+Finding duplicate cells in `\icg_cell'.
+Removed a total of 280 cells.
+
+11.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$439.
+    dead port 2/2 on $mux $procmux$427.
+    dead port 1/2 on $mux $procmux$425.
+    dead port 2/2 on $mux $procmux$412.
+    dead port 1/2 on $mux $procmux$410.
+    dead port 1/2 on $mux $procmux$407.
+    dead port 2/2 on $mux $procmux$394.
+    dead port 2/2 on $mux $procmux$383.
+    dead port 2/2 on $mux $procmux$372.
+    dead port 2/2 on $mux $procmux$362.
+    dead port 1/2 on $mux $procmux$360.
+    dead port 2/2 on $mux $procmux$349.
+    dead port 2/2 on $mux $procmux$340.
+    dead port 1/2 on $mux $procmux$338.
+    dead port 2/2 on $mux $procmux$328.
+    dead port 2/2 on $mux $procmux$320.
+    dead port 2/2 on $mux $procmux$452.
+Running muxtree optimizer on module \sensor_regbank..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \retention_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$613.
+    dead port 2/2 on $mux $procmux$603.
+    dead port 1/2 on $mux $procmux$601.
+    dead port 2/2 on $mux $procmux$590.
+    dead port 2/2 on $mux $procmux$581.
+    dead port 2/2 on $mux $procmux$573.
+    dead port 2/2 on $mux $procmux$566.
+Running muxtree optimizer on module \power_sequencer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 2/2 on $mux $procmux$784.
+    dead port 2/2 on $mux $procmux$768.
+    dead port 1/2 on $mux $procmux$766.
+    dead port 2/2 on $mux $procmux$749.
+    dead port 2/2 on $mux $procmux$734.
+    dead port 2/2 on $mux $procmux$720.
+    dead port 2/2 on $mux $procmux$707.
+    dead port 2/2 on $mux $procmux$695.
+    dead port 2/2 on $mux $procmux$684.
+    dead port 2/2 on $mux $procmux$674.
+    dead port 2/2 on $mux $procmux$665.
+    dead port 2/2 on $mux $procmux$657.
+    dead port 2/2 on $mux $procmux$650.
+Running muxtree optimizer on module \wakeup_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+    dead port 1/2 on $mux $procmux$1514.
+    dead port 2/2 on $mux $procmux$1514.
+    dead port 1/2 on $mux $procmux$1511.
+    dead port 2/2 on $mux $procmux$1511.
+    dead port 1/2 on $mux $procmux$1505.
+    dead port 2/2 on $mux $procmux$1505.
+    dead port 1/2 on $mux $procmux$1502.
+    dead port 2/2 on $mux $procmux$1502.
+    dead port 2/2 on $mux $procmux$1496.
+    dead port 1/2 on $mux $procmux$1126.
+    dead port 2/2 on $mux $procmux$1126.
+    dead port 1/2 on $mux $procmux$1123.
+    dead port 2/2 on $mux $procmux$1123.
+    dead port 1/2 on $mux $procmux$1117.
+    dead port 2/2 on $mux $procmux$1117.
+    dead port 1/2 on $mux $procmux$1114.
+    dead port 2/2 on $mux $procmux$1114.
+    dead port 2/2 on $mux $procmux$1111.
+    dead port 1/2 on $mux $procmux$1102.
+    dead port 2/2 on $mux $procmux$1102.
+    dead port 2/2 on $mux $procmux$1484.
+    dead port 1/5 on $pmux $procmux$1097.
+    dead port 2/5 on $pmux $procmux$1097.
+    dead port 3/5 on $pmux $procmux$1097.
+    dead port 4/5 on $pmux $procmux$1097.
+    dead port 5/5 on $pmux $procmux$1097.
+    dead port 1/2 on $mux $procmux$1093.
+    dead port 2/2 on $mux $procmux$1093.
+    dead port 1/5 on $pmux $procmux$1088.
+    dead port 2/5 on $pmux $procmux$1088.
+    dead port 3/5 on $pmux $procmux$1088.
+    dead port 4/5 on $pmux $procmux$1088.
+    dead port 5/5 on $pmux $procmux$1088.
+    dead port 2/2 on $mux $procmux$1084.
+    dead port 1/5 on $pmux $procmux$1079.
+    dead port 2/5 on $pmux $procmux$1079.
+    dead port 3/5 on $pmux $procmux$1079.
+    dead port 4/5 on $pmux $procmux$1079.
+    dead port 1/2 on $mux $procmux$1072.
+    dead port 2/2 on $mux $procmux$1072.
+    dead port 1/5 on $pmux $procmux$1067.
+    dead port 2/5 on $pmux $procmux$1067.
+    dead port 3/5 on $pmux $procmux$1067.
+    dead port 4/5 on $pmux $procmux$1067.
+    dead port 5/5 on $pmux $procmux$1067.
+    dead port 1/2 on $mux $procmux$1064.
+    dead port 2/2 on $mux $procmux$1064.
+    dead port 1/2 on $mux $procmux$1048.
+    dead port 2/2 on $mux $procmux$1048.
+    dead port 1/2 on $mux $procmux$1045.
+    dead port 2/2 on $mux $procmux$1045.
+    dead port 1/2 on $mux $procmux$1042.
+    dead port 2/2 on $mux $procmux$1042.
+    dead port 1/2 on $mux $procmux$1039.
+    dead port 2/2 on $mux $procmux$1039.
+    dead port 1/2 on $mux $procmux$1036.
+    dead port 2/2 on $mux $procmux$1036.
+    dead port 1/2 on $mux $procmux$1033.
+    dead port 2/2 on $mux $procmux$1033.
+    dead port 1/2 on $mux $procmux$1031.
+    dead port 2/2 on $mux $procmux$1031.
+    dead port 1/2 on $mux $procmux$1027.
+    dead port 2/2 on $mux $procmux$1027.
+    dead port 1/2 on $mux $procmux$1024.
+    dead port 2/2 on $mux $procmux$1024.
+    dead port 1/2 on $mux $procmux$1022.
+    dead port 2/2 on $mux $procmux$1022.
+    dead port 1/2 on $mux $procmux$987.
+    dead port 2/2 on $mux $procmux$987.
+    dead port 1/2 on $mux $procmux$984.
+    dead port 2/2 on $mux $procmux$984.
+    dead port 2/2 on $mux $procmux$981.
+    dead port 1/2 on $mux $procmux$970.
+    dead port 2/2 on $mux $procmux$970.
+    dead port 2/2 on $mux $procmux$1423.
+    dead port 1/7 on $pmux $procmux$963.
+    dead port 2/7 on $pmux $procmux$963.
+    dead port 3/7 on $pmux $procmux$963.
+    dead port 4/7 on $pmux $procmux$963.
+    dead port 5/7 on $pmux $procmux$963.
+    dead port 6/7 on $pmux $procmux$963.
+    dead port 7/7 on $pmux $procmux$963.
+    dead port 1/2 on $mux $procmux$959.
+    dead port 2/2 on $mux $procmux$959.
+    dead port 2/2 on $mux $procmux$1413.
+    dead port 1/2 on $mux $procmux$1411.
+    dead port 1/2 on $mux $procmux$1400.
+    dead port 2/2 on $mux $procmux$1400.
+    dead port 1/7 on $pmux $procmux$952.
+    dead port 2/7 on $pmux $procmux$952.
+    dead port 3/7 on $pmux $procmux$952.
+    dead port 4/7 on $pmux $procmux$952.
+    dead port 5/7 on $pmux $procmux$952.
+    dead port 6/7 on $pmux $procmux$952.
+    dead port 7/7 on $pmux $procmux$952.
+    dead port 2/2 on $mux $procmux$948.
+    dead port 1/5 on $pmux $procmux$1395.
+    dead port 2/5 on $pmux $procmux$1395.
+    dead port 3/5 on $pmux $procmux$1395.
+    dead port 4/5 on $pmux $procmux$1395.
+    dead port 5/5 on $pmux $procmux$1395.
+    dead port 1/2 on $mux $procmux$1392.
+    dead port 2/2 on $mux $procmux$1392.
+    dead port 1/7 on $pmux $procmux$941.
+    dead port 2/7 on $pmux $procmux$941.
+    dead port 3/7 on $pmux $procmux$941.
+    dead port 4/7 on $pmux $procmux$941.
+    dead port 5/7 on $pmux $procmux$941.
+    dead port 6/7 on $pmux $procmux$941.
+    dead port 1/2 on $mux $procmux$934.
+    dead port 2/2 on $mux $procmux$934.
+    dead port 1/7 on $pmux $procmux$927.
+    dead port 2/7 on $pmux $procmux$927.
+    dead port 3/7 on $pmux $procmux$927.
+    dead port 4/7 on $pmux $procmux$927.
+    dead port 5/7 on $pmux $procmux$927.
+    dead port 6/7 on $pmux $procmux$927.
+    dead port 7/7 on $pmux $procmux$927.
+    dead port 1/2 on $mux $procmux$924.
+    dead port 2/2 on $mux $procmux$924.
+    dead port 1/2 on $mux $procmux$920.
+    dead port 2/2 on $mux $procmux$920.
+    dead port 1/7 on $pmux $procmux$913.
+    dead port 2/7 on $pmux $procmux$913.
+    dead port 3/7 on $pmux $procmux$913.
+    dead port 4/7 on $pmux $procmux$913.
+    dead port 5/7 on $pmux $procmux$913.
+    dead port 6/7 on $pmux $procmux$913.
+    dead port 7/7 on $pmux $procmux$913.
+    dead port 1/2 on $mux $procmux$910.
+    dead port 2/2 on $mux $procmux$910.
+    dead port 2/2 on $mux $procmux$906.
+    dead port 1/7 on $pmux $procmux$899.
+    dead port 2/7 on $pmux $procmux$899.
+    dead port 3/7 on $pmux $procmux$899.
+    dead port 4/7 on $pmux $procmux$899.
+    dead port 5/7 on $pmux $procmux$899.
+    dead port 6/7 on $pmux $procmux$899.
+    dead port 2/2 on $mux $procmux$896.
+Running muxtree optimizer on module \vega_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \iso_cell..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \icg_cell..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 176 multiplexer ports.
+<suppressed ~321 debug messages>
+
+11.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+  Optimizing cells in module \sensor_regbank.
+  Optimizing cells in module \retention_ctrl.
+    New ctrl vector for $pmux cell $procmux$627: $auto$opt_reduce.cc:137:opt_pmux$1821
+    New ctrl vector for $pmux cell $procmux$640: $auto$opt_reduce.cc:137:opt_pmux$1823
+  Optimizing cells in module \retention_ctrl.
+  Optimizing cells in module \power_sequencer.
+    New ctrl vector for $pmux cell $procmux$860: $auto$opt_reduce.cc:137:opt_pmux$1825
+    New ctrl vector for $pmux cell $procmux$814: $auto$opt_reduce.cc:137:opt_pmux$1827
+    New ctrl vector for $pmux cell $procmux$801: $auto$opt_reduce.cc:137:opt_pmux$1829
+    New ctrl vector for $pmux cell $procmux$820: $auto$opt_reduce.cc:137:opt_pmux$1831
+  Optimizing cells in module \power_sequencer.
+  Optimizing cells in module \wakeup_ctrl.
+  Optimizing cells in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+    New ctrl vector for $pmux cell $procmux$1143: $auto$opt_reduce.cc:137:opt_pmux$1833
+    New ctrl vector for $pmux cell $procmux$1106: $auto$opt_reduce.cc:137:opt_pmux$1835
+    New ctrl vector for $pmux cell $procmux$1251: $auto$opt_reduce.cc:137:opt_pmux$1837
+    New ctrl vector for $pmux cell $procmux$1221: $auto$opt_reduce.cc:137:opt_pmux$1839
+    New ctrl vector for $pmux cell $procmux$1011: $auto$opt_reduce.cc:137:opt_pmux$1841
+    New ctrl vector for $pmux cell $procmux$974: $auto$opt_reduce.cc:137:opt_pmux$1843
+    New ctrl vector for $pmux cell $procmux$1193: $auto$opt_reduce.cc:137:opt_pmux$1845
+    New ctrl vector for $pmux cell $procmux$1167: $auto$opt_reduce.cc:137:opt_pmux$1847
+    New ctrl vector for $pmux cell $procmux$1353: $auto$opt_reduce.cc:137:opt_pmux$1849
+    New ctrl vector for $pmux cell $procmux$1283: $auto$opt_reduce.cc:137:opt_pmux$1851
+    New ctrl vector for $pmux cell $procmux$1317: $auto$opt_reduce.cc:137:opt_pmux$1853
+  Optimizing cells in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+  Optimizing cells in module \vega_top.
+  Optimizing cells in module \iso_cell.
+  Optimizing cells in module \icg_cell.
+Performed a total of 17 changes.
+
+11.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Computing hashes of 44 cells of `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Finding duplicate cells in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Finding identical cells in module `\sensor_regbank'.
+Computing hashes of 54 cells of `\sensor_regbank'.
+Finding duplicate cells in `\sensor_regbank'.
+Finding identical cells in module `\retention_ctrl'.
+Computing hashes of 33 cells of `\retention_ctrl'.
+Finding duplicate cells in `\retention_ctrl'.
+Computing hashes of 32 cells of `\retention_ctrl'.
+Finding duplicate cells in `\retention_ctrl'.
+Computing hashes of 31 cells of `\retention_ctrl'.
+Finding duplicate cells in `\retention_ctrl'.
+<suppressed ~6 debug messages>
+Finding identical cells in module `\power_sequencer'.
+Computing hashes of 46 cells of `\power_sequencer'.
+Finding duplicate cells in `\power_sequencer'.
+Finding identical cells in module `\wakeup_ctrl'.
+Computing hashes of 31 cells of `\wakeup_ctrl'.
+Finding duplicate cells in `\wakeup_ctrl'.
+Finding identical cells in module `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Computing hashes of 214 cells of `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Finding duplicate cells in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Computing hashes of 205 cells of `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Finding duplicate cells in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+<suppressed ~27 debug messages>
+Finding identical cells in module `\vega_top'.
+Computing hashes of 41 cells of `\vega_top'.
+Finding duplicate cells in `\vega_top'.
+Finding identical cells in module `\iso_cell'.
+Computing hashes of 1 cells of `\iso_cell'.
+Finding duplicate cells in `\iso_cell'.
+Finding identical cells in module `\icg_cell'.
+Computing hashes of 2 cells of `\icg_cell'.
+Finding duplicate cells in `\icg_cell'.
+Removed a total of 11 cells.
+
+11.6. Executing OPT_DFF pass (perform DFF optimizations).
+Adding EN signal on $procdff$1520 ($adff) from module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm (D = $procmux$456_Y, Q = \state).
+Adding EN signal on $procdff$1565 ($adff) from module sensor_regbank (D = \reg_wdata, Q = \irq_thresh2_reg).
+Adding EN signal on $procdff$1560 ($adff) from module sensor_regbank (D = \reg_wdata, Q = \irq_thresh1_reg).
+Adding EN signal on $procdff$1555 ($adff) from module sensor_regbank (D = \reg_wdata, Q = \irq_thresh0_reg).
+Adding EN signal on $procdff$1575 ($adff) from module sensor_regbank (D = \irq_status_reg [31:3], Q = \irq_status_reg [31:3]).
+Handling D = Q on $auto$ff.cc:337:slice$1878 ($adffe) from module sensor_regbank (removing D path).
+Adding EN signal on $procdff$1545 ($adff) from module sensor_regbank (D = \reg_wdata, Q = \ctrl_reg).
+Adding EN signal on $procdff$1570 ($adff) from module sensor_regbank (D = \reg_wdata, Q = \pwr_ctrl_reg).
+Adding EN signal on $procdff$1550 ($adff) from module sensor_regbank (D = \reg_wdata, Q = \irq_mask_reg).
+Setting constant 0-bit at position 0 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 1 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 2 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 3 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 4 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 5 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 6 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 7 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 8 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 9 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 10 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 11 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 12 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 13 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 14 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 15 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 16 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 17 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 18 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 19 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 20 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 21 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 22 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 23 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 24 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 25 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 26 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 27 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Setting constant 0-bit at position 28 on $auto$ff.cc:337:slice$1878 ($dlatch) from module sensor_regbank.
+Adding EN signal on $procdff$1605 ($adff) from module retention_ctrl (D = $procmux$616_Y, Q = \state).
+Adding EN signal on $procdff$1615 ($adff) from module power_sequencer (D = $procmux$787_Y, Q = \state).
+Adding EN signal on $procdff$1625 ($adff) from module wakeup_ctrl (D = $procmux$883_Y, Q = \wakeup_ext_lat).
+Adding EN signal on $procdff$1630 ($adff) from module wakeup_ctrl (D = $procmux$878_Y, Q = \wakeup_rtc_lat).
+Adding EN signal on $procdff$1635 ($adff) from module wakeup_ctrl (D = $procmux$873_Y, Q = \wakeup_irq_lat).
+Adding EN signal on $procdff$1779 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1148_Y, Q = \regfile[7]).
+Adding EN signal on $procdff$1759 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1256_Y, Q = \regfile[3]).
+Adding EN signal on $procdff$1707 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = \pwdata [31:1], Q = \ctrl_reg [31:1]).
+Adding EN signal on $procdff$1707 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1060_Y, Q = \ctrl_reg [0]).
+Adding EN signal on $procdff$1744 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1358_Y, Q = \regfile[0]).
+Adding EN signal on $procdff$1789 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = \alu_overflow, Q = \overflow_flag).
+Adding EN signal on $procdff$1702 ($dff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $3\rd_rf_idx[31:0], Q = \rd_rf_idx).
+Handling D = Q on $procdff$1739 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (removing D path).
+Adding EN signal on $procdff$1712 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = \pwdata, Q = \op_reg).
+Adding EN signal on $procdff$1784 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1428_Y, Q = \state).
+Adding EN signal on $procdff$1717 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = \pwdata, Q = \operand_a_reg).
+Adding EN signal on $procdff$1769 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1198_Y, Q = \regfile[5]).
+Adding EN signal on $procdff$1749 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1322_Y, Q = \regfile[1]).
+Adding EN signal on $procdff$1722 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = \pwdata, Q = \operand_b_reg).
+Adding EN signal on $procdff$1764 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1226_Y, Q = \regfile[4]).
+Adding EN signal on $procdff$1754 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1288_Y, Q = \regfile[2]).
+Adding EN signal on $procdff$1809 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = \op_reg [14:12], Q = \pipe_rd_idx).
+Adding EN signal on $procdff$1804 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = \alu_result, Q = \pipe_result).
+Adding EN signal on $procdff$1727 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = \pipe_result, Q = \result_reg).
+Adding EN signal on $procdff$1819 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = \op_reg [3:0], Q = \pipe_opcode).
+Adding EN signal on $procdff$1774 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1172_Y, Q = \regfile[6]).
+Adding EN signal on $procdff$1734 ($dff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $3\wr_rf_idx[31:0], Q = \wr_rf_idx).
+Adding EN signal on $procdff$1799 ($adff) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor (D = $procmux$1440_Y, Q = \irq_pending).
+Setting constant 0-bit at position 0 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 1 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 2 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 1-bit at position 3 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 4 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 5 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 6 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 7 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 8 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 9 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 10 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 11 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 12 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 13 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 14 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 15 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 16 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 17 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 18 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 19 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 20 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 21 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 22 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 23 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 24 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 25 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 26 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 27 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 28 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 29 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 30 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Setting constant 0-bit at position 31 on $procdff$1739 ($dlatch) from module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+
+11.7. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm..
+Finding unused cells or wires in module \sensor_regbank..
+Finding unused cells or wires in module \retention_ctrl..
+Finding unused cells or wires in module \power_sequencer..
+Finding unused cells or wires in module \wakeup_ctrl..
+Finding unused cells or wires in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor..
+Finding unused cells or wires in module \vega_top..
+Finding unused cells or wires in module \iso_cell..
+Finding unused cells or wires in module \icg_cell..
+Removed 92 unused cells and 918 unused wires.
+<suppressed ~105 debug messages>
+
+11.8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+Optimizing module sensor_regbank.
+Optimizing module retention_ctrl.
+Optimizing module power_sequencer.
+Optimizing module wakeup_ctrl.
+<suppressed ~3 debug messages>
+Optimizing module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+<suppressed ~25 debug messages>
+Optimizing module vega_top.
+Optimizing module iso_cell.
+Optimizing module icg_cell.
+
+11.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+11.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \sensor_regbank..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \retention_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \power_sequencer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \wakeup_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vega_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \iso_cell..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \icg_cell..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~208 debug messages>
+
+11.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+  Optimizing cells in module \sensor_regbank.
+  Optimizing cells in module \retention_ctrl.
+  Optimizing cells in module \power_sequencer.
+  Optimizing cells in module \wakeup_ctrl.
+  Optimizing cells in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+  Optimizing cells in module \vega_top.
+  Optimizing cells in module \iso_cell.
+  Optimizing cells in module \icg_cell.
+Performed a total of 0 changes.
+
+11.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Computing hashes of 48 cells of `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Finding duplicate cells in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Finding identical cells in module `\sensor_regbank'.
+Computing hashes of 46 cells of `\sensor_regbank'.
+Finding duplicate cells in `\sensor_regbank'.
+Finding identical cells in module `\retention_ctrl'.
+Computing hashes of 32 cells of `\retention_ctrl'.
+Finding duplicate cells in `\retention_ctrl'.
+Finding identical cells in module `\power_sequencer'.
+Computing hashes of 53 cells of `\power_sequencer'.
+Finding duplicate cells in `\power_sequencer'.
+Finding identical cells in module `\wakeup_ctrl'.
+Computing hashes of 32 cells of `\wakeup_ctrl'.
+Finding duplicate cells in `\wakeup_ctrl'.
+Finding identical cells in module `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Computing hashes of 243 cells of `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Finding duplicate cells in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Computing hashes of 215 cells of `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Finding duplicate cells in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+<suppressed ~84 debug messages>
+Finding identical cells in module `\vega_top'.
+Computing hashes of 8 cells of `\vega_top'.
+Finding duplicate cells in `\vega_top'.
+Finding identical cells in module `\iso_cell'.
+Computing hashes of 1 cells of `\iso_cell'.
+Finding duplicate cells in `\iso_cell'.
+Finding identical cells in module `\icg_cell'.
+Computing hashes of 2 cells of `\icg_cell'.
+Finding duplicate cells in `\icg_cell'.
+Removed a total of 28 cells.
+
+11.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm..
+Finding unused cells or wires in module \sensor_regbank..
+Finding unused cells or wires in module \retention_ctrl..
+Finding unused cells or wires in module \power_sequencer..
+Finding unused cells or wires in module \wakeup_ctrl..
+Finding unused cells or wires in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor..
+Finding unused cells or wires in module \vega_top..
+Finding unused cells or wires in module \iso_cell..
+Finding unused cells or wires in module \icg_cell..
+Removed 0 unused cells and 28 unused wires.
+<suppressed ~1 debug messages>
+
+11.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+Optimizing module sensor_regbank.
+Optimizing module retention_ctrl.
+Optimizing module power_sequencer.
+Optimizing module wakeup_ctrl.
+Optimizing module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Optimizing module vega_top.
+Optimizing module iso_cell.
+Optimizing module icg_cell.
+
+11.16. Rerunning OPT passes. (Maybe there is more to do..)
+
+11.17. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \sensor_regbank..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \retention_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \power_sequencer..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \wakeup_ctrl..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \vega_top..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Running muxtree optimizer on module \iso_cell..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \icg_cell..
+  Creating internal representation of mux trees.
+  No muxes found in this module.
+Removed 0 multiplexer ports.
+<suppressed ~208 debug messages>
+
+11.18. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+  Optimizing cells in module \sensor_regbank.
+  Optimizing cells in module \retention_ctrl.
+  Optimizing cells in module \power_sequencer.
+  Optimizing cells in module \wakeup_ctrl.
+  Optimizing cells in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+  Optimizing cells in module \vega_top.
+  Optimizing cells in module \iso_cell.
+  Optimizing cells in module \icg_cell.
+Performed a total of 0 changes.
+
+11.19. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Computing hashes of 48 cells of `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Finding duplicate cells in `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Finding identical cells in module `\sensor_regbank'.
+Computing hashes of 46 cells of `\sensor_regbank'.
+Finding duplicate cells in `\sensor_regbank'.
+Finding identical cells in module `\retention_ctrl'.
+Computing hashes of 32 cells of `\retention_ctrl'.
+Finding duplicate cells in `\retention_ctrl'.
+Finding identical cells in module `\power_sequencer'.
+Computing hashes of 53 cells of `\power_sequencer'.
+Finding duplicate cells in `\power_sequencer'.
+Finding identical cells in module `\wakeup_ctrl'.
+Computing hashes of 32 cells of `\wakeup_ctrl'.
+Finding duplicate cells in `\wakeup_ctrl'.
+Finding identical cells in module `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Computing hashes of 215 cells of `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Finding duplicate cells in `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Finding identical cells in module `\vega_top'.
+Computing hashes of 8 cells of `\vega_top'.
+Finding duplicate cells in `\vega_top'.
+Finding identical cells in module `\iso_cell'.
+Computing hashes of 1 cells of `\iso_cell'.
+Finding duplicate cells in `\iso_cell'.
+Finding identical cells in module `\icg_cell'.
+Computing hashes of 2 cells of `\icg_cell'.
+Finding duplicate cells in `\icg_cell'.
+Removed a total of 0 cells.
+
+11.20. Executing OPT_DFF pass (perform DFF optimizations).
+
+11.21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm..
+Finding unused cells or wires in module \sensor_regbank..
+Finding unused cells or wires in module \retention_ctrl..
+Finding unused cells or wires in module \power_sequencer..
+Finding unused cells or wires in module \wakeup_ctrl..
+Finding unused cells or wires in module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor..
+Finding unused cells or wires in module \vega_top..
+Finding unused cells or wires in module \iso_cell..
+Finding unused cells or wires in module \icg_cell..
+
+11.22. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm.
+Optimizing module sensor_regbank.
+Optimizing module retention_ctrl.
+Optimizing module power_sequencer.
+Optimizing module wakeup_ctrl.
+Optimizing module $paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor.
+Optimizing module vega_top.
+Optimizing module iso_cell.
+Optimizing module icg_cell.
+
+11.23. Finished fast OPT passes. (There is nothing left to do.)
+
+12. Executing Verilog backend.
+
+12.1. Executing BMUXMAP pass.
+
+12.2. Executing DEMUXMAP pass.
+Dumping module `$paramod$75c960d2b8780f31b5b2a9710a4ae3f10fb177d0\data_processor'.
+Dumping module `$paramod$aa0e0fe2fcccd29e4fd4c43da721521782bc64cd\pmu_fsm'.
+Dumping module `\icg_cell'.
+Dumping module `\iso_cell'.
+Dumping module `\power_sequencer'.
+Dumping module `\retention_ctrl'.
+Dumping module `\sensor_regbank'.
+Dumping module `\vega_top'.
+Dumping module `\wakeup_ctrl'.
+
+Warnings: 1 unique messages, 2 total
+End of script. Logfile hash: a1ce3e5e72, time: 0.20s, user: 0.16s, system: 0.00s, MEM: 22.59 MB peak
+Yosys 0.64+26 (git sha1 a54bca549, clang++ 14.0.0-1ubuntu1.1 -fPIC -O3)
+Time spent: 19% 9x read_verilog (0 sec), 18% 3x opt_dff (0 sec), ...

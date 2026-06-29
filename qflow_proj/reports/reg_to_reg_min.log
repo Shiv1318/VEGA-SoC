@@ -1,0 +1,125 @@
+Vesta static timing analysis, register-to-register minimum timing
+
+Top 20 minimum delay paths:
+Path DFFSR_132/CLK to DFFSR_86/D delay -235.923 ps
+      0.0 ps  u_data_processor_clk_gated_bF_buf4: CLKBUF1_104/Y ->  DFFSR_132/CLK
+    475.5 ps           u_data_processor_state_2_:   DFFSR_132/Q -> NOR2X1_395/A
+    607.8 ps                              _5010_:  NOR2X1_395/Y ->   DFFSR_86/D
+
+   clock skew at destination = -784.765
+   hold at destination = -58.9173
+
+Path DFFSR_40/CLK to DFFSR_42/D delay 347.18 ps
+      0.0 ps               clk_bF_buf7: CLKBUF1_37/Y -> DFFSR_40/CLK
+    382.2 ps  u_wakeup_ctrl_rtc_sync_1:   DFFSR_40/Q -> DFFSR_42/D
+
+   clock skew at destination = -6.59493
+   hold at destination = -28.4423
+
+Path DFFSR_4/CLK to DFFSR_6/D delay 349.137 ps
+      0.0 ps                     clk_bF_buf27: CLKBUF1_17/Y -> DFFSR_4/CLK
+    435.2 ps  u_retention_ctrl_ctx_valid_next:    DFFSR_4/Q -> DFFSR_6/D
+
+   clock skew at destination = -21.4083
+   hold at destination = -64.6999
+
+Path DFFSR_35/CLK to DFFSR_39/D delay 361.178 ps
+      0.0 ps              clk_bF_buf24: CLKBUF1_20/Y -> DFFSR_35/CLK
+    382.2 ps  u_wakeup_ctrl_ext_sync_1:   DFFSR_35/Q -> DFFSR_39/D
+
+   clock skew at destination = 6.59493
+   hold at destination = -27.6347
+
+Path DFFSR_36/CLK to DFFSR_41/D delay 365.231 ps
+      0.0 ps              clk_bF_buf35: CLKBUF1_9/Y -> DFFSR_36/CLK
+    339.1 ps  u_wakeup_ctrl_irq_sync_0:  DFFSR_36/Q -> DFFSR_41/D
+
+   clock skew at destination = 25.5482
+   hold at destination = 0.608752
+
+Path DFFSR_76/CLK to DFFSR_35/D delay 365.231 ps
+      0.0 ps              clk_bF_buf24: CLKBUF1_20/Y -> DFFSR_76/CLK
+    339.1 ps  u_wakeup_ctrl_ext_sync_0:   DFFSR_76/Q -> DFFSR_35/D
+
+   clock skew at destination = 25.5482
+   hold at destination = 0.608752
+
+Path DFFSR_9/CLK to DFFSR_5/D delay 365.882 ps
+      0.0 ps                     clk_bF_buf22: CLKBUF1_22/Y -> DFFSR_9/CLK
+    391.0 ps  u_retention_ctrl_save_done_next:    DFFSR_9/Q -> DFFSR_5/D
+
+   clock skew at destination = 8.8163
+   hold at destination = -33.9733
+
+Path DFFSR_34/CLK to DFFSR_40/D delay 366.648 ps
+      0.0 ps               clk_bF_buf7: CLKBUF1_37/Y -> DFFSR_34/CLK
+    339.1 ps  u_wakeup_ctrl_rtc_sync_0:   DFFSR_34/Q -> DFFSR_40/D
+
+   clock skew at destination = 25.3579
+   hold at destination = 2.21596
+
+Path DFFSR_41/CLK to DFFSR_43/D delay 379.242 ps
+      0.0 ps              clk_bF_buf35: CLKBUF1_9/Y -> DFFSR_41/CLK
+    382.2 ps  u_wakeup_ctrl_irq_sync_1:  DFFSR_41/Q -> DFFSR_43/D
+
+   clock skew at destination = 25.5482
+   hold at destination = -28.5238
+
+Path DFFSR_705/CLK to output pin reg_rdata[29] delay 441.656 ps
+      0.0 ps   clk_bF_buf38: CLKBUF1_6/Y -> DFFSR_705/CLK
+    338.9 ps     _5226__29_: DFFSR_705/Q ->  BUFX2_48/A
+    441.7 ps  reg_rdata[29]:  BUFX2_48/Y -> reg_rdata[29]
+
+Path DFFSR_652/CLK to output pin reg_rdata[13] delay 441.656 ps
+      0.0 ps   clk_bF_buf37: CLKBUF1_7/Y -> DFFSR_652/CLK
+    338.9 ps     _5226__13_: DFFSR_652/Q ->  BUFX2_64/A
+    441.7 ps  reg_rdata[13]:  BUFX2_64/Y -> reg_rdata[13]
+
+Path DFFSR_659/CLK to output pin reg_rdata[14] delay 441.656 ps
+      0.0 ps   clk_bF_buf37: CLKBUF1_7/Y -> DFFSR_659/CLK
+    338.9 ps     _5226__14_: DFFSR_659/Q ->  BUFX2_63/A
+    441.7 ps  reg_rdata[14]:  BUFX2_63/Y -> reg_rdata[14]
+
+Path DFFSR_702/CLK to output pin reg_rdata[26] delay 441.656 ps
+      0.0 ps   clk_bF_buf36: CLKBUF1_8/Y -> DFFSR_702/CLK
+    338.9 ps     _5226__26_: DFFSR_702/Q ->  BUFX2_51/A
+    441.7 ps  reg_rdata[26]:  BUFX2_51/Y -> reg_rdata[26]
+
+Path DFFSR_562/CLK to output pin reg_ack delay 441.656 ps
+      0.0 ps  clk_bF_buf35: CLKBUF1_9/Y -> DFFSR_562/CLK
+    338.9 ps        _5225_: DFFSR_562/Q ->  BUFX2_78/A
+    441.7 ps       reg_ack:  BUFX2_78/Y -> reg_ack
+
+Path DFFSR_714/CLK to output pin reg_rdata[7] delay 441.656 ps
+      0.0 ps  clk_bF_buf35: CLKBUF1_9/Y -> DFFSR_714/CLK
+    338.9 ps     _5226__7_: DFFSR_714/Q ->  BUFX2_70/A
+    441.7 ps  reg_rdata[7]:  BUFX2_70/Y -> reg_rdata[7]
+
+Path DFFSR_698/CLK to output pin reg_rdata[22] delay 441.656 ps
+      0.0 ps   clk_bF_buf33: CLKBUF1_11/Y -> DFFSR_698/CLK
+    338.9 ps     _5226__22_:  DFFSR_698/Q ->  BUFX2_55/A
+    441.7 ps  reg_rdata[22]:   BUFX2_55/Y -> reg_rdata[22]
+
+Path DFFSR_706/CLK to output pin reg_rdata[30] delay 441.656 ps
+      0.0 ps   clk_bF_buf33: CLKBUF1_11/Y -> DFFSR_706/CLK
+    338.9 ps     _5226__30_:  DFFSR_706/Q ->  BUFX2_47/A
+    441.7 ps  reg_rdata[30]:   BUFX2_47/Y -> reg_rdata[30]
+
+Path DFFSR_703/CLK to output pin reg_rdata[27] delay 441.656 ps
+      0.0 ps   clk_bF_buf31: CLKBUF1_13/Y -> DFFSR_703/CLK
+    338.9 ps     _5226__27_:  DFFSR_703/Q ->  BUFX2_50/A
+    441.7 ps  reg_rdata[27]:   BUFX2_50/Y -> reg_rdata[27]
+
+Path DFFSR_695/CLK to output pin reg_rdata[19] delay 441.656 ps
+      0.0 ps   clk_bF_buf30: CLKBUF1_14/Y -> DFFSR_695/CLK
+    338.9 ps     _5226__19_:  DFFSR_695/Q ->  BUFX2_58/A
+    441.7 ps  reg_rdata[19]:   BUFX2_58/Y -> reg_rdata[19]
+
+Path DFFSR_715/CLK to output pin reg_rdata[8] delay 441.656 ps
+      0.0 ps  clk_bF_buf30: CLKBUF1_14/Y -> DFFSR_715/CLK
+    338.9 ps     _5226__8_:  DFFSR_715/Q ->  BUFX2_69/A
+    441.7 ps  reg_rdata[8]:   BUFX2_69/Y -> reg_rdata[8]
+
+ERROR:  Design fails minimum hold timing.
+-----------------------------------------
+
