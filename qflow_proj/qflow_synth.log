@@ -1,0 +1,20 @@
+
+--------------------------------
+Qflow project setup
+--------------------------------
+
+Technology set to osu035
+Regenerating files for existing project vega_top
+Running yosys for verilog parsing and synthesis
+yosys  -s vega_top.ys
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.64+26 (git sha1 a54bca549, clang++ 14.0.0-1ubuntu1.1 -fPIC -O3)
+
+-- Executing script file `vega_top.ys' --
+
+Synthesis and processing logs moved to qflow_proj/

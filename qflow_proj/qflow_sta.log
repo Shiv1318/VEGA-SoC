@@ -1,0 +1,25 @@
+
+--------------------------------
+Qflow project setup
+--------------------------------
+
+Technology set to osu035
+Regenerating files for existing project vega_top
+Running vesta static timing analysis
+vesta --summary reports --long vega_top.rtlnopwr.v /apps/vlsi/share/qflow/tech/osu035/osu035_stdcells.lib
+
+----------------------------------------------
+Vesta static timing analysis tool
+for qflow 1.3.17
+(c) 2013-2018 Tim Edwards, Open Circuit Design
+----------------------------------------------
+
+Parsing library "osu035_stdcells"
+End of library at line 6636
+Parsing module "vega_top"
+Lib read /apps/vlsi/share/qflow/tech/osu035/osu035_stdcells.lib:  Processed 6637 lines.
+Verilog netlist read:  Processed 58445 lines.
+Number of paths analyzed:  1350
+
+Timing Analysis Results logged...
+Total errors = 0

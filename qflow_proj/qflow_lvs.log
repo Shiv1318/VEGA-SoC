@@ -1,0 +1,18 @@
+
+--------------------------------
+Qflow project setup
+--------------------------------
+
+Technology set to osu035
+Regenerating files for existing project vega_top
+Running netgen
+netgen ${lvs_options} -batch lvs "${rootname}.spice ${rootname}" 
+	"${synthdir}/${rootname}.spc ${rootname}" ${setup_script} ${outfile} 
+	-json -blackbox
+Netgen 1.5.316 compiled on Thu Apr  2 11:46:26 IST 2026
+
+Final result: 
+Circuits match uniquely.
+
+LVS Done.
+Total errors = 0
