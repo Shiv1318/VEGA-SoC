@@ -1,0 +1,13 @@
+# Verilator build
+obj_dir/
+
+# Waveforms
+*.vcd
+
+# Temporary files
+*.tmp
+*.bak
+
+# Editor
+*.swp
+.DS_Store
