@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="banner.jpeg" width="100%">
+  <img src="assets/banner.jpeg" width="100%">
 </p>
 
 # VEGA SoC - Multi-Power-Domain RTL-to-GDSII ASIC Implementation
@@ -31,14 +31,10 @@ The processor and memory domains can be powered down to reduce leakage power whi
 - Manufacturable GDSII Layout
 - Full Functional & Physical Verification
 
----
-
-## Complete Design Flow
-
 ## RTL-to-GDSII Design Flow
 
 <p align="center">
-  <img src="vega_workflow.jpeg" width="100%">
+  <img src="assets/vega_workflow.jpeg" width="100%">
 </p>
 
 ### Stage 1: Problem Definition
