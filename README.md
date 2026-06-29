@@ -176,36 +176,6 @@ The processor and memory domains can be powered down to reduce leakage power whi
 | Verification | Netgen, OpenSTA |
 | Integration | Qflow |
 
----
-
-## System Architecture
-
-```
-┌─────────────────────────────────────┐
-│          VEGA SoC Top Level         │
-├──────────────┬──────────┬───────────┤
-│  PD_AON      │ PD_PROC  │  PD_MEM   │
-├──────────────┼──────────┼───────────┤
-│ • PMU FSM    │ • ALU    │ • RegBank │
-│ • WakeupCtrl │ • RegFile│ • RetCtrl │
-│ • SeqCtrl    │          │           │
-└──────────────┴────────────┴──────────┘
-```
-
-**RTL Modules:** `vega_top` | `pmu_fsm` | `wakeup_ctrl` | `power_sequencer` | `data_processor` | `sensor_regbank` | `retention_ctrl`
-
-## CI/CD Workflow
-
-This project uses GitHub Actions for automated testing and verification:
-
-## Results
-
-✓ RTL Synthesis Complete | ✓ Gate-level Netlist Generated | ✓ Placement & Routing Done
----|---|---
-✓ DRC Verified | ✓ LVS Verified (Zero Mismatch) | ✓ STA Completed
-✓ IEEE 1801 UPF Implemented | ✓ GDSII Layout Generated | **RTL-to-GDSII Complete**
-
----
 
 ## Future Enhancements
 
