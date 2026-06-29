@@ -35,8 +35,10 @@ The processor and memory domains can be powered down to reduce leakage power whi
 
 ## Complete Design Flow
 
+## RTL-to-GDSII Design Flow
+
 <p align="center">
-  <img src="banner.jpeg" width="100%">
+  <img src="vega_workflow.jpeg" width="100%">
 </p>
 
 ### Stage 1: Problem Definition
