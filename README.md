@@ -1,264 +1,140 @@
-![VEGA SoC - Complete RTL-to-GDSII Design Flow](https://github.com/Shiv1318/VEGA-SoC/raw/main/assets/vega-banner.png)
+# VEGA SoC - Multi-Power-Domain RTL-to-GDSII ASIC Implementation
 
-# VEGA SoC
-
-**Multi-Power-Domain RTL-to-GDSII ASIC Implementation**
-
-VEGA SoC is a low-power multi-power-domain System-on-Chip (SoC) designed using SystemVerilog and implemented through a complete RTL-to-GDSII ASIC design flow. The project demonstrates how a digital chip is taken from synthesizable RTL to a manufacturable GDSII layout using open-source EDA tools. It also includes IEEE 1801 Unified Power Format (UPF) implementation for describing the chip's power intent.
+A low-power multi-power-domain System-on-Chip (SoC) designed using SystemVerilog and implemented through a complete RTL-to-GDSII ASIC design flow using open-source EDA tools with IEEE 1801 UPF implementation.
 
 ---
 
-## 📋 Overview
+## Overview
 
-The objective of this project is to design a low-power ASIC with multiple power domains and implement the complete physical design flow.
+**VEGA SoC** consists of three independent power domains:
 
-The SoC is divided into **three power domains**:
+- **PD_AON** (Always-On): PMU, Wake-up Controller, Power Sequencer
+- **PD_PROC** (Processor): Data Processor (ALU), Register File
+- **PD_MEM** (Memory): Sensor Register Bank, Retention Controller
 
-- **PD_AON (Always-On Domain)** – Contains the Power Management Unit (PMU), Wake-up Controller, and Power Sequencer.
-- **PD_PROC (Processor Domain)** – Contains the Data Processor (ALU) and Register File.
-- **PD_MEM (Memory Domain)** – Contains the Sensor Register Bank and Retention Controller.
-
-The processor and memory domains can be powered down to reduce leakage power, while the always-on domain continues monitoring wake-up events.
+The processor and memory domains can be powered down to reduce leakage power while the always-on domain monitors wake-up events.
 
 ---
 
-## ✨ Features
+## Key Features
 
-- ✅ **Multi-Power-Domain SoC Architecture**
-- ✅ **Low-Power Design Techniques**
-  - Power Gating
-  - Retention Logic
-  - Wake-up Controller
-- ✅ **Power Management Unit (PMU)**
-- ✅ **Power Sequencer**
-- ✅ **Data Processor (ALU)**
-- ✅ **Sensor Register Bank**
-- ✅ **IEEE 1801 UPF Implementation**
-- ✅ **Complete RTL-to-GDSII Flow**
-- ✅ **Manufacturable GDSII Layout**
+✨ Multi-Power-Domain Architecture | 🔋 Power Gating & Retention Logic | ⚡ Low-Power Design
+---|---|---
+💾 Power Management Unit (PMU) | 🎯 Power Sequencer | 📊 IEEE 1801 UPF Implementation
+🔧 Complete RTL-to-GDSII Flow | 🏭 Manufacturable GDSII Layout | ✅ Full Verification
 
 ---
 
-## 🔄 Design Flow
+## Design Flow (12 Stages)
 
-The project follows the complete ASIC implementation flow:
-
-1. **Problem Definition** - Design a low-power SoC with multi-power-domain architecture
-2. **System Architecture Design** - Define power domains and system components
-3. **RTL Design (SystemVerilog)** - Implement synthesizable RTL modules
-4. **RTL Simulation & Testbench** - Verify functionality with directed testbenches
-5. **Functional Verification** - Comprehensive verification of all modules
-6. **Logic Synthesis** - RTL to Gate-level conversion
-7. **Physical Implementation** - Floorplanning, placement, and routing
-8. **Design Rule Check (DRC)** - Manufacturing rule verification
-9. **Layout Versus Schematic (LVS)** - Connectivity verification
-10. **Static Timing Analysis (STA)** - Timing constraint verification
-11. **IEEE 1801 UPF Implementation** - Power intent specification
-12. **GDSII Generation** - Final manufacturable layout
+| Stage | Description | Tool |
+|-------|-------------|------|
+| 1️⃣ Problem Definition | Low-power SoC architecture design | - |
+| 2️⃣ System Architecture | Design 3 power domains & components | - |
+| 3️⃣ RTL Design | SystemVerilog implementation | GVim |
+| 4️⃣ RTL Simulation | Functional verification | Icarus/Verilator |
+| 5️⃣ Logic Synthesis | RTL to Gate-level | Yosys + ABC |
+| 6️⃣ Physical Design | Floorplan, Placement, Routing | GrayWolf/Qrouter |
+| 7️⃣ DRC Verification | Manufacturing rules | Magic VLSI |
+| 8️⃣ LVS Verification | Connectivity check | Netgen |
+| 9️⃣ Static Timing | Timing analysis | OpenSTA |
+| 🔟 UPF Implementation | Power intent specification | IEEE 1801 UPF |
+| 1️⃣1️⃣ GDSII Generation | Final layout | Magic VLSI |
 
 ---
 
-## 🏗️ System Architecture
-
-The architecture consists of three independent power domains:
-
-### Power Domains
+## System Architecture
 
 ```
-┌─────────────────────────────────────────────────┐
-│                   VEGA SoC                      │
-├──────────────┬──────────────┬──────────────────┤
-│  PD_AON      │  PD_PROC     │  PD_MEM          │
-│  (Always-On) │ (Processor)  │  (Memory)        │
-├──────────────┼──────────────┼──────────────────┤
-│ • PMU FSM    │ • ALU        │ • Sensor RegBank │
-│ • Wakeup Ctrl│ • Reg File   │ • Retention Ctrl │
-│ • Seq Ctrl   │              │                  │
-└──────────────┴──────────────┴──────────────────┘
+┌─────────────────────────────────────┐
+│          VEGA SoC Top Level         │
+├──────────────┬──────────┬───────────┤
+│  PD_AON      │ PD_PROC  │  PD_MEM   │
+├──────────────┼──────────┼───────────┤
+│ • PMU FSM    │ • ALU    │ • RegBank │
+│ • WakeupCtrl │ • RegFile│ • RetCtrl │
+│ • SeqCtrl    │          │           │
+└──────────────┴──────────┴───────────┘
 ```
 
-### RTL Modules
-
-- `vega_top` - Top-level module
-- `pmu_fsm` - Power Management Unit FSM
-- `wakeup_ctrl` - Wake-up Controller
-- `power_sequencer` - Power Sequencing Logic
-- `data_processor` - ALU and Data Processing
-- `sensor_regbank` - Sensor Register Bank
-- `retention_ctrl` - Retention Controller
+**RTL Modules:** `vega_top` | `pmu_fsm` | `wakeup_ctrl` | `power_sequencer` | `data_processor` | `sensor_regbank` | `retention_ctrl`
 
 ---
 
-## 🛠️ EDA Tools Used
+## EDA Tools Stack
 
-| Stage | Tool |
+| Phase | Tool |
 |-------|------|
-| RTL Design | GVim / VS Code |
-| Simulation | Icarus Verilog / Verilator |
-| Waveform Analysis | GTKWave |
-| Logic Synthesis | Yosys + ABC |
-| Placement | GrayWolf |
-| Routing | Qrouter |
-| Layout Generation | Magic VLSI |
-| LVS Verification | Netgen |
-| Static Timing Analysis | OpenSTA |
-| Complete Physical Design | Qflow |
-| Layout Visualization | KLayout |
+| Design & Simulation | GVim, Icarus Verilog, Verilator, GTKWave |
+| Synthesis | Yosys, ABC |
+| P&R | GrayWolf, Qrouter, Magic VLSI |
+| Verification | Netgen, OpenSTA |
+| Integration | Qflow |
 
 ---
 
-## 📊 Results
-
-✅ RTL successfully synthesized
-✅ Gate-level netlist generated
-✅ Placement completed
-✅ Routing completed
-✅ Static Timing Analysis performed
-✅ DRC verification completed
-✅ LVS verified with zero mismatch
-✅ IEEE 1801 UPF implemented
-✅ Final GDSII layout generated successfully
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 VEGA-SoC/
-│
-├── rtl/                          # SystemVerilog RTL modules
-│   ├── vega_top.v
-│   ├── pmu_fsm.v
-│   ├── wakeup_ctrl.v
-│   ├── power_sequencer.v
-│   ├── data_processor.v
-│   ├── sensor_regbank.v
-│   └── retention_ctrl.v
-│
-├── tb/                           # Testbenches and verification
-│   ├── vega_tb.v
-│   ├── pmu_tb.v
-│   ├── test_vectors/
-│   └── waveforms/
-│
-├── qflow_proj/                   # Qflow physical design project
-│   ├── layout/
-│   ├── netlist/
-│   └── gdsii/
-│
-├── obj_dir/                      # Build artifacts
-│
-├── upf/                          # IEEE 1801 UPF files
-│   ├── vega_power_intent.upf
-│   └── power_domains.upf
-│
-├── docs/                         # Documentation
-│   ├── design_spec.md
-│   ├── architecture.md
-│   └── power_management.md
-│
-├── assets/                       # Images and diagrams
-│   └── vega-banner.png
-│
-├── scripts/                      # Automation scripts
-│   ├── run_simulation.sh
-│   ├── run_synthesis.sh
-│   └── run_pnr.sh
-│
-├── README.md                     # This file
-└── LICENSE                       # MIT License
+├── rtl/              # SystemVerilog modules
+├── tb/               # Testbenches
+├── qflow_proj/       # Physical design
+├── upf/              # IEEE 1801 UPF files
+├── docs/             # Documentation
+├── scripts/          # Automation scripts
+└── README.md
 ```
 
 ---
 
-## 🚀 Getting Started
+## Quick Start
 
-### Prerequisites
-
-- SystemVerilog/Verilog knowledge
-- Open-source EDA tools installed:
-  - Icarus Verilog or Verilator
-  - Yosys
-  - Qflow
-  - Magic VLSI
-  - OpenSTA
-
-### Running Simulations
-
+### Run Simulation
 ```bash
 cd tb/
 icarus_verilog -o vega_sim vega_tb.v ../rtl/*.v
-./vega_sim
-gtkwave dump.vcd
+./vega_sim && gtkwave dump.vcd
 ```
 
-### Running Synthesis
-
+### Run Synthesis
 ```bash
 cd qflow_proj/
 qflow synthesize vega_top
 ```
 
-### Running Place & Route
-
+### Run Place & Route
 ```bash
-qflow place vega_top
-qflow route vega_top
+qflow place vega_top && qflow route vega_top
 ```
 
 ---
 
-## 📚 Documentation
+## Results
 
-Detailed documentation is available in the `docs/` directory:
-
-- **Design Specification** - Complete functional specification
-- **Architecture Guide** - System architecture and components
-- **Power Management** - UPF implementation details
-- **Design Flow** - Step-by-step implementation guide
+✅ RTL Synthesis Complete | ✅ Gate-level Netlist Generated | ✅ Placement & Routing Done
+---|---|---
+✅ DRC Verified | ✅ LVS Verified (Zero Mismatch) | ✅ STA Completed
+✅ IEEE 1801 UPF Implemented | ✅ GDSII Layout Generated | **🎉 RTL-to-GDSII Complete**
 
 ---
 
-## 🔮 Future Work
+## Future Enhancements
 
-- [ ] Clock Gating implementation
-- [ ] Dynamic Voltage and Frequency Scaling (DVFS)
-- [ ] Additional Low-Power Techniques
-- [ ] Formal Verification
-- [ ] OpenROAD-based Implementation
-- [ ] Silicon Measurement Results
-- [ ] Tapeout Integration
+🔲 Clock Gating | 🔲 DVFS Implementation | 🔲 Formal Verification | 🔲 OpenROAD Integration | 🔲 Silicon Tapeout
 
 ---
 
-## 👤 Author
+## Author
 
-**Shiv Kumar**
-
-B.Tech Electronics & Communication Engineering (VLSI)
-
-*Jaypee Institute of Information Technology*
+**Shiv Kumar** | B.Tech VLSI | Jaypee Institute of Information Technology
 
 ---
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
+MIT License - See [LICENSE](LICENSE) file
 
 ---
 
-## 📞 Contact
-
-For questions or collaboration opportunities, please reach out via GitHub issues or email.
-
----
-
-**Last Updated:** June 29, 2026
-
-**Status:** ✅ RTL-to-GDSII Flow Complete
+**Status:** ✅ Complete | **Last Updated:** June 2026
