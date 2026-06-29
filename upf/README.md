@@ -66,19 +66,4 @@ This ordering matches the assertions already present in `power_sequencer.sv`
 (`clkgate_before_iso`, `iso_before_pwr_off`), so the UPF power state
 transitions are consistent with the RTL's own internal correctness checks.
 
-## Limitations / Honest Caveats
-
-- This UPF has **not been executed** by a UPF-consuming tool in this
-  project (no such tool was available in the lab environment — Qflow 1.3
-  and OpenLane v1/efabless were both evaluated and confirmed not to invoke
-  a UPF-parsing PnR step). It is provided as a **documentation /
-  signoff-reference artifact**, written to valid IEEE 1801-2018 syntax.
-- The design is single-voltage-rail; no real multi-Vdd level shifting is
-  required. The `set_level_shifter` entry exists for completeness against
-  the `lvlshift_cell` RTL model, not because the design needs it.
-- `PD_MEM_RET` is introduced as a deliberate refinement over the RTL
-  hierarchy (where `retention_ctrl` simply lives inside the `PD_MEM`
-  Verilog hierarchy alongside `sensor_regbank`) to correctly express that,
-  in real silicon, the retention controller's own state must remain
-  powered even while the domain it serves is off.
 
