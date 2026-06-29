@@ -2,7 +2,7 @@
 
 # VEGA SoC - Multi-Power-Domain RTL-to-GDSII ASIC Implementation
 
-A low-power multi-power-domain System-on-Chip (SoC) designed using SystemVerilog and implemented through a complete RTL-to-GDSII ASIC design flow using open-source EDA tools with IEEE 1801 UPF implementation.
+A low-power multi-power-domain System-on-Chip (SoC) designed using SystemVerilog and implemented through a complete RTL-to-GDSII ASIC design flow using open-source EDA tools with IEEE 1801 UPF impl[...]
 
 ---
 
@@ -181,7 +181,7 @@ The processor and memory domains can be powered down to reduce leakage power whi
 │ • PMU FSM    │ • ALU    │ • RegBank │
 │ • WakeupCtrl │ • RegFile│ • RetCtrl │
 │ • SeqCtrl    │          │           │
-└──────────────┴──────────┴───────────┘
+└──────────────┴────────────┴──────────┘
 ```
 
 **RTL Modules:** `vega_top` | `pmu_fsm` | `wakeup_ctrl` | `power_sequencer` | `data_processor` | `sensor_regbank` | `retention_ctrl`
@@ -204,13 +204,6 @@ VEGA-SoC/
 ---
 
 ## Quick Start
-
-### Run Simulation
-```bash
-cd tb/
-icarus_verilog -o vega_sim vega_tb.v ../rtl/*.v
-./vega_sim && gtkwave dump.vcd
-```
 
 ### Run Synthesis
 ```bash
